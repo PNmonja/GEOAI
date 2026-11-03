@@ -1,0 +1,179 @@
+ 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GEOAI: plataforma educativa para explorar rocas, minerales y fósiles.">
+  <title>GEOAI | Exploración geológica</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="logo" href="#">
+      <span class="logo-symbol">G</span>
+      <span>GEO<span class="accent">AI</span></span>
+    </a>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#laboratorio">Laboratorio</a>
+      <a href="#explorar">Explorar</a>
+    </nav>
+
+    <span class="status"><span class="status-dot"></span> PROYECTO EN DESARROLLO</span>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <p class="eyebrow">TECNOLOGÍA · GEOLOGÍA · EXPLORACIÓN</p>
+        <h1>Descubre la Tierra.<br><span>Comprende su historia.</span></h1>
+        <p class="hero-description">
+          Explora el mundo de las rocas, los minerales y los fósiles
+          mediante una plataforma digital diseñada para aprender e investigar.
+        </p>
+        <a class="primary-button" href="#laboratorio">Entrar al laboratorio <span>→</span></a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="planet">
+          <div class="planet-line"></div>
+          <div class="planet-line second"></div>
+          <span>GEOAI</span>
+        </div>
+        <div class="visual-label">EARTH SCIENCE PLATFORM</div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><strong>01</strong><span>Identificación</span></div>
+      <div><strong>02</strong><span>Investigación</span></div>
+      <div><strong>03</strong><span>Aprendizaje</span></div>
+      <div><strong>04</strong><span>Exploración</span></div>
+    </section>
+
+    <section class="laboratory section" id="laboratorio">
+      <div class="section-heading">
+        <p class="eyebrow">01 / ANÁLISIS DE MUESTRAS</p>
+        <h2>Laboratorio <span>GEOAI</span></h2>
+        <p>Registra una muestra para comenzar su estudio.</p>
+      </div>
+
+      <div class="lab-grid">
+        <div class="upload-panel">
+          <div class="panel-heading">
+            <h3>Imagen de la muestra</h3>
+            <span class="step-number">01</span>
+          </div>
+
+          <label class="upload-area" for="imageInput" id="uploadArea">
+            <div class="upload-icon">＋</div>
+            <strong>Seleccionar imagen</strong>
+            <span>Arrastra una imagen o pulsa aquí</span>
+            <small>JPG, PNG o WEBP</small>
+            <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp">
+            <img id="imagePreview" alt="Vista previa de la muestra">
+          </label>
+        </div>
+
+        <div class="details-panel">
+          <div class="panel-heading">
+            <h3>Datos de observación</h3>
+            <span class="step-number">02</span>
+          </div>
+
+          <form id="sampleForm">
+            <label for="sampleName">Nombre provisional</label>
+            <input id="sampleName" type="text" placeholder="Ej. Muestra número 01">
+
+            <label for="sampleType">Tipo de muestra</label>
+            <select id="sampleType">
+              <option value="">Seleccionar categoría</option>
+              <option value="Roca">Roca</option>
+              <option value="Mineral">Mineral</option>
+              <option value="Fósil">Fósil</option>
+              <option value="No identificado">No identificado</option>
+            </select>
+
+            <label for="sampleColor">Color predominante</label>
+            <input id="sampleColor" type="text" placeholder="Ej. Gris, rojizo, blanco...">
+
+            <label for="sampleTexture">Textura o aspecto</label>
+            <select id="sampleTexture">
+              <option value="">Seleccionar textura</option>
+              <option value="Cristalina">Cristalina</option>
+              <option value="Granular">Granular</option>
+              <option value="Lisa">Lisa</option>
+              <option value="Rugosa">Rugosa</option>
+              <option value="Porosa">Porosa</option>
+              <option value="Fosilizada">Fosilizada</option>
+              <option value="Otra">Otra</option>
+            </select>
+
+            <label for="sampleLocation">Lugar de recogida</label>
+            <input id="sampleLocation" type="text" placeholder="Localidad o región">
+
+            <button class="primary-button submit-button" type="submit">Guardar observación →</button>
+          </form>
+          <p id="formMessage" class="form-message" aria-live="polite"></p>
+        </div>
+      </div>
+      <p class="disclaimer">Nota: esta versión permite registrar observaciones, pero todavía no identifica muestras automáticamente mediante inteligencia artificial.</p>
+    </section>
+
+    <section class="explore section" id="explorar">
+      <div class="section-heading">
+        <p class="eyebrow">02 / BASE DE CONOCIMIENTO</p>
+        <h2>Áreas de <span>exploración</span></h2>
+        <p>Tres grandes campos para investigar nuestro planeta.</p>
+      </div>
+
+      <div class="explore-grid">
+        <article class="explore-card">
+          <span class="card-number">01</span>
+          <div class="card-symbol">◇</div>
+          <h3>Mineralogía</h3>
+          <p>Estudio de los minerales, sus propiedades, composición y formación.</p>
+        </article>
+
+        <article class="explore-card">
+          <span class="card-number">02</span>
+          <div class="card-symbol">◈</div>
+          <h3>Petrología</h3>
+          <p>Investigación de las rocas y los procesos geológicos que las originan.</p>
+        </article>
+
+        <article class="explore-card">
+          <span class="card-number">03</span>
+          <div class="card-symbol">✧</div>
+          <h3>Paleontología</h3>
+          <p>Exploración de fósiles para conocer la historia de la vida en la Tierra.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="observations section">
+      <div class="section-heading">
+        <p class="eyebrow">03 / REGISTRO PERSONAL</p>
+        <h2>Mis <span>observaciones</span></h2>
+        <p>Las muestras que has registrado en este dispositivo.</p>
+      </div>
+      <div id="observationsList" class="observations-list">
+        <p class="empty-state">Todavía no hay observaciones guardadas.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo" href="#"><span class="logo-symbol">G</span> GEO<span class="accent">AI</span></a>
+    <p>Explora, identifica y comprende la Tierra.</p>
+    <span>GEOAI © 2026</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
