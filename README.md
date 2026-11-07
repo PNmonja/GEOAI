@@ -1,40 +1,18 @@
-# GEOAI
-Plataforma de identificación de rocas, minerales y fósiles mediante imágenes.
-# GEOAI 🌍
+# GEOAI — Laboratorio v1
 
-### Plataforma inteligente de identificación geológica
+Aplicación estática para GitHub Pages. Incluye catálogo de muestras demostrativas, búsqueda, filtros y una guía interactiva orientativa para propiedades minerales.
 
-GEOAI es un proyecto tecnológico dedicado a la identificación y estudio de rocas, minerales y fósiles mediante imágenes.
+## Publicación
+1. Descomprime el ZIP.
+2. Sube `index.html`, `styles.css` y `app.js` a la raíz del repositorio `GEOAI`.
+3. En GitHub abre **Settings → Pages**.
+4. Selecciona **Deploy from a branch**, rama `main`, carpeta `/ (root)` y guarda.
+5. Cuando el despliegue termine, la aplicación estará disponible en la URL de GitHub Pages.
 
-## Objetivo
+Si el repositorio ya contiene una web, haz una copia de seguridad antes de sustituir archivos.
 
-Desarrollar una plataforma digital educativa y científica que facilite el reconocimiento de muestras geológicas y ayude a comprender mejor la composición y diversidad de nuestro planeta.
+## Google Sites
+Configura el botón «EXPLORAR LABORATORIO» para abrir la URL pública de GitHub Pages.
 
-## Funciones principales
-
-- Identificación de rocas, minerales y fósiles.
-- Análisis visual de muestras mediante imágenes.
-- Información científica y educativa.
-- Registro de observaciones.
-- Interfaz multilingüe.
-- Diseño adaptable a ordenadores y dispositivos móviles.
-
-## Tecnologías
-
-- HTML
-- CSS
-- JavaScript
-
-## Estado del proyecto
-
-GEOAI se encuentra actualmente en fase de desarrollo. Las funciones de identificación mediante inteligencia artificial se incorporarán cuando se conecte un modelo especializado.
-
-## Idiomas
-
-- Español
-- English
-- Valencià
-
----
-
-**GEOAI — Explora, identifica y comprende la Tierra.**
+## Alcance
+Esta versión no tiene todavía IA conectada, backend, PostgreSQL/PostGIS ni un servicio GIS. La guía es educativa y orientativa; no ofrece identificaciones definitivas. Las muestras son ejemplos de demostración.
