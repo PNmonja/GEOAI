@@ -1,0 +1,22 @@
+{
+  "project": "OQTHERA",
+  "dataset_version": "0.1-draft",
+  "status": "schema_only_no_images_collected",
+  "task": "mineral_image_classification_with_abstention",
+  "classes": [
+    {"class_id":"MIN-001","label":"Cuarzo","formula":"SiO2"},
+    {"class_id":"MIN-002","label":"Calcita","formula":"CaCO3"},
+    {"class_id":"MIN-003","label":"Yeso","formula":"CaSO4·2H2O"},
+    {"class_id":"MIN-004","label":"Halita","formula":"NaCl"},
+    {"class_id":"MIN-005","label":"Moscovita","formula":"KAl2(AlSi3O10)(OH)2"},
+    {"class_id":"MIN-006","label":"Biotita","formula":"K(Mg,Fe)3AlSi3O10(F,OH)2"}
+  ],
+  "abstention_label": "unknown_or_out_of_scope",
+  "out_of_scope_examples": ["other_minerals","rocks","fossils","manufactured_objects","poor_quality_images","non_specimen_images"],
+  "split_unit": "physical_specimen_id",
+  "split_ratios": {"train":0.70,"validation":0.15,"test":0.15},
+  "required_metadata": ["sample_id","class_id","scientific_name","determination_source","determined_by","review_status","locality","image_id","image_path","photographer","license","attribution","source_url","view","lighting","background","condition","split","notes"],
+  "evaluation_metrics": ["precision_per_class","recall_per_class","confusion_matrix","abstention_cases","out_of_scope_rejection"],
+  "images_collected": 0,
+  "model_trained": false
+}
