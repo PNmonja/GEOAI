@@ -30,3 +30,11 @@
 8. Diseñar y entrenar el modelo solo cuando el conjunto sea suficiente y equilibrado.
 
 Los scripts ayudan a detectar errores de organización, pero no certifican la identificación mineralógica ni los derechos de autor.
+
+## Banco visual y entrenamiento experimental
+- `commons-gallery.js`: buscador de candidatos en Wikimedia Commons, con metadatos de autoría/licencia y exportación CSV para revisión. Los candidatos no se marcan como verificados.
+- `ml/train.py`: pipeline experimental de transfer learning con MobileNetV2; requiere imágenes locales revisadas y particionadas.
+- `requirements-ml.txt`: dependencias para el entrenamiento.
+- `ml/README.md`: instrucciones y límites del experimento.
+
+La API de Commons expone metadatos de cada archivo, pero la licencia debe comprobarse en su página original; los archivos pueden tener condiciones distintas. El buscador no descarga ni incorpora imágenes automáticamente al entrenamiento.
