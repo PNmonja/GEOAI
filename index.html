@@ -1,12 +1,102 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071521"><meta name="description" content="CRISLOFAUSRA: exploración científica de rocas, minerales y fósiles."><title>CRISLOFAUSRA</title><link rel="stylesheet" href="styles.css"></head>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17130f">
+  <meta name="description" content="OQTHERA: explora, compara e identifica de forma orientativa rocas y minerales con fichas, propiedades y fuentes consultables.">
+  <title>OQTHERA — Exploración científica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-<header class="top"><a class="logo" href="#">CRISLOFAUSRA<small>EXPLORACIÓN CIENTÍFICA</small></a><nav><a href="#explorar">Explorar</a><a href="#identificacion">Identificación</a><a href="#metodo">Metodología</a></nav><a class="toplink" href="#explorar">ENTRAR AL LABORATORIO ↗</a><button id="menu">☰</button></header>
-<main>
-<section class="hero"><div><label>● PLATAFORMA DE EXPLORACIÓN CIENTÍFICA</label><h1>La Tierra guarda historias. <em>Vamos a descubrirlas.</em></h1><p>Un espacio digital para estudiar rocas, minerales y fósiles mediante observación, datos geológicos y herramientas de análisis.</p><a class="btn" href="#explorar">EXPLORAR MUESTRAS →</a> <a class="btn ghost" href="#identificacion">IDENTIFICAR UN MINERAL</a><div class="meta">GEOLOGÍA　/　MINERALOGÍA　/　PALEONTOLOGÍA</div></div><div class="planet"><div class="orb"></div><div class="gem">◇</div><b>CRISLOFAUSRA / 001</b><small>EARTH SYSTEMS</small></div></section>
-<section class="stats"><div><b>03</b> ÁREAS DE ESTUDIO</div><div><b>01</b> GUÍA INTERACTIVA</div><div><b>∞</b> DESCUBRIMIENTOS</div><div class="right">Ciencia basada en evidencias,<br>no en suposiciones.</div></section>
-<section id="explorar" class="section"><label>01 — EXPLORACIÓN</label><h2>Explora el <em>mundo natural.</em></h2><p class="sub">Selecciona un campo de estudio o busca una muestra en el catálogo inicial.</p><div class="domains"><button data-filter="Roca"><i>⌁</i><small>01 / GEOLOGÍA</small><h3>Rocas</h3><p>Origen, composición, textura y procesos que forman la corteza terrestre.</p><strong>EXPLORAR ROCAS ↗</strong></button><button data-filter="Mineral"><i>◇</i><small>02 / MINERALOGÍA</small><h3>Minerales</h3><p>Propiedades físicas, composición química y formación de cristales.</p><strong>EXPLORAR MINERALES ↗</strong></button><button data-filter="Fósil"><i>◎</i><small>03 / PALEONTOLOGÍA</small><h3>Fósiles</h3><p>Restos y señales de vida antigua para reconstruir la historia del planeta.</p><strong>EXPLORAR FÓSILES ↗</strong></button></div>
-<div class="toolbar"><div><label>COLECCIÓN DE REFERENCIA</label><h3>Catálogo de muestras</h3></div><input id="search" placeholder="Buscar una muestra…"><select id="filter"><option>Todos</option><option>Roca</option><option>Mineral</option><option>Fósil</option></select></div><div id="samples" class="samples"></div><p class="note">Colección demostrativa educativa. Las fichas son ejemplos introductorios, no determinaciones de laboratorio.</p></section>
-<section id="identificacion" class="identify"><div><label>02 — HERRAMIENTA INTERACTIVA</label><h2>Una primera pista para <em>identificar minerales.</em></h2><p>Responde a unas preguntas sobre las propiedades observables de una muestra. La guía mostrará minerales compatibles para seguir investigando.</p><aside>ⓘ La guía es orientativa. No sustituye pruebas de laboratorio ni una identificación realizada por personal especialista.</aside></div><div class="quiz"><div class="qtop"><span>CRISLOFAUSRA / MINERAL KEY</span><span id="step">PASO 01 DE 03</span></div><div class="bar"><i id="progress"></i></div><div id="question"></div><div class="qfoot"><button id="back" disabled>← ANTERIOR</button><button id="reset">REINICIAR ↺</button></div></div></section>
-<section id="metodo" class="section method"><label>03 — CRITERIO CIENTÍFICO</label><div class="methodgrid"><h2>Observar primero.<br><em>Interpretar después.</em></h2><div><p><b>01　Observación</b><br>Registrar color, textura, brillo, forma y contexto de la muestra.</p><p><b>02　Contraste</b><br>Comparar propiedades con referencias y datos documentados.</p><p><b>03　Validación</b><br>Indicar incertidumbre y solicitar revisión experta cuando sea necesario.</p></div></div></section>
-</main><footer><a class="logo" href="#">GEO<span>AI</span><small>EXPLORACIÓN CIENTÍFICA</small></a><p>Explorar la Tierra a través de la ciencia.</p><small>CRISLOFAUSRA · PROTOTIPO EDUCATIVO</small></footer><script src="app.js"></script></body></html>
+<header class="top">
+  <a class="brand" href="#inicio" aria-label="OQTHERA, inicio"><span class="brand-mark">✧</span><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a>
+  <nav id="main-nav"><a href="#identificar">Identificar</a><a href="#coleccion">Colección</a><a href="#proyecto">El proyecto</a></nav>
+  <a class="toplink" href="#identificar">ABRIR EXPLORADOR ↗</a>
+  <button id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="hero-copy">
+      <label class="eyebrow">ARCHIVO DIGITAL · GEOLOGÍA · MINERALOGÍA</label>
+      <h1>La Tierra deja pistas.<br><em>Aprende a leerlas.</em></h1>
+      <p>Explora rocas y minerales, compara sus propiedades y consulta referencias científicas. OQTHERA convierte la observación en el primer paso del descubrimiento.</p>
+      <div class="hero-actions"><a class="btn" href="#identificar">IDENTIFICAR UNA MUESTRA ↗</a><a class="btn ghost" href="#coleccion">EXPLORAR LA COLECCIÓN</a></div>
+      <div class="hero-meta">OBSERVAR / COMPARAR / CONTRASTAR</div>
+    </div>
+    <div class="hero-art" aria-label="Ilustración decorativa de minerales y brújula">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <div class="crystal crystal-a"></div><div class="crystal crystal-b"></div><div class="crystal crystal-c"></div>
+      <div class="compass">✧</div><span class="art-caption">FIELD NOTES · VOL. 01</span>
+    </div>
+  </section>
+
+  <section class="principles">
+    <div><b>01</b><span>OBSERVACIÓN<br><small>Describe lo que ves</small></span></div>
+    <div><b>02</b><span>COMPARACIÓN<br><small>Contrasta propiedades</small></span></div>
+    <div><b>03</b><span>REFERENCIAS<br><small>Consulta las fuentes</small></span></div>
+    <p>Orientación científica, nunca certezas inventadas.</p>
+  </section>
+
+  <section class="section entry-section">
+    <label class="eyebrow">EMPIEZA POR AQUÍ</label>
+    <h2>Tres caminos para <em>explorar.</em></h2>
+    <div class="entry-grid">
+      <a class="entry-card entry-feature" href="#identificar"><span class="entry-icon">⌕</span><small>01 / HERRAMIENTA</small><h3>Identificar una muestra</h3><p>Registra propiedades observables y obtén posibilidades que podrás contrastar.</p><strong>EMPEZAR IDENTIFICACIÓN ↗</strong></a>
+      <a class="entry-card" href="#coleccion"><span class="entry-icon">◇</span><small>02 / CATÁLOGO</small><h3>Explorar la colección</h3><p>Consulta fichas introductorias de minerales y grandes grupos de rocas.</p><strong>VER COLECCIÓN ↗</strong></a>
+      <a class="entry-card" href="#proyecto"><span class="entry-icon">⌑</span><small>03 / INFORMACIÓN</small><h3>Conocer OQTHERA</h3><p>Descubre cómo funciona el proyecto, sus criterios, fuentes y límites.</p><strong>CONOCER EL PROYECTO ↗</strong></a>
+    </div>
+  </section>
+
+  <section id="identificar" class="identify-section">
+    <div class="section identify-intro">
+      <label class="eyebrow">01 — LABORATORIO DE OBSERVACIÓN</label>
+      <h2>Una muestra.<br><em>Varias pistas.</em></h2>
+      <p>Esta primera versión trabaja con un conjunto limitado de minerales frecuentes. Responde solo a propiedades que hayas observado. Si no tienes información suficiente, puedes indicarlo.</p>
+      <div class="notice"><b>Importante</b><br>La herramienta actual es una guía de decisión basada en propiedades declaradas; todavía no analiza fotografías mediante un modelo de visión artificial. No confirma identidades.</div>
+      <div class="accepted"><b>Conjunto inicial admitido</b><span>Cuarzo · Calcita · Yeso · Halita · Micas · Feldespatos</span></div>
+    </div>
+    <div class="lab-panel">
+      <div class="panel-head"><span>OQTHERA / FIELD ANALYSIS</span><span id="step-count">PASO 01 / 04</span></div>
+      <div class="progress"><i id="progress"></i></div>
+      <div id="question-area" aria-live="polite"></div>
+      <div class="panel-foot"><button id="back" disabled>← ANTERIOR</button><button id="restart">REINICIAR ↺</button></div>
+    </div>
+  </section>
+
+  <section id="coleccion" class="section collection-section">
+    <label class="eyebrow">02 — ARCHIVO DE REFERENCIA</label>
+    <h2>Explora la <em>colección.</em></h2>
+    <p class="section-lead">Fichas introductorias para aprender a comparar propiedades. Las categorías disponibles se irán ampliando tras revisar los datos y las imágenes de cada muestra.</p>
+    <div class="catalog-tools"><input id="search" type="search" placeholder="Buscar mineral o propiedad…" aria-label="Buscar en la colección"><select id="filter" aria-label="Filtrar colección"><option value="Todos">Todas las categorías</option><option value="Mineral">Minerales</option><option value="Roca">Rocas</option></select></div>
+    <div id="samples" class="sample-grid"></div>
+    <p class="small-note">Las fichas sin fotografía propia se muestran como referencias textuales. No se atribuyen imágenes ni procedencias que no hayan sido verificadas.</p>
+  </section>
+
+  <section id="proyecto" class="project-section">
+    <div class="section project-grid">
+      <div><label class="eyebrow">03 — SOBRE OQTHERA</label><h2>Ciencia con <em>criterio.</em></h2><p>OQTHERA es una plataforma digital de exploración y aprendizaje sobre la Tierra. Su objetivo es ayudar a observar, comparar y documentar muestras naturales de forma comprensible.</p></div>
+      <div class="project-points">
+        <article><b>01 / ALCANCE</b><p>La primera etapa se centra en minerales frecuentes y grandes grupos de rocas. La identificación detallada de fósiles y la prospección minera quedan fuera de esta versión.</p></article>
+        <article><b>02 / TRANSPARENCIA</b><p>Los resultados son orientativos. Se mostrarán alternativas, datos pendientes y casos sin información suficiente en lugar de presentar una certeza aparente.</p></article>
+        <article><b>03 / FUENTES</b><p>Las fichas deben indicar referencias consultables, autoría de las imágenes, licencia y fecha de revisión cuando esos datos estén disponibles.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sources-section">
+    <label class="eyebrow">04 — CONSULTA EXTERNA</label>
+    <h2>Contrasta con <em>fuentes.</em></h2>
+    <p class="section-lead">OQTHERA no copia automáticamente fichas ni fotografías de bases externas. Usa estos enlaces para ampliar la consulta en sus sitios originales.</p>
+    <div class="source-links"><a href="https://www.mindat.org/" target="_blank" rel="noopener noreferrer"><b>Mindat</b><span>Base de datos mineralógica externa ↗</span></a><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener noreferrer"><b>Wikimedia Commons</b><span>Imágenes y licencias de cada archivo ↗</span></a></div>
+    <p class="small-note">La integración directa con la API de Mindat queda pendiente de confirmar permisos, condiciones de uso y una conexión segura desde un servidor. No se guardan claves privadas en esta web pública.</p>
+  </section>
+</main>
+
+<footer><a class="brand" href="#inicio"><span class="brand-mark">✧</span><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a><p>Explora · Identifica · Descubre</p><small>OQTHERA · PROYECTO EN DESARROLLO</small></footer>
+<script src="app.js"></script>
+</body></html>
