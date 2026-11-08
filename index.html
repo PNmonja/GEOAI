@@ -14,7 +14,7 @@
 <body>
 <header class="top">
   <a class="brand" href="#inicio" aria-label="OQTHERA, inicio"><img class="brand-logo" src="assets/oqthera-mark.svg" alt=""><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a>
-  <nav id="main-nav"><a href="#identificar">Identificar</a><a href="#coleccion">Colección</a><a href="#proyecto">El proyecto</a></nav>
+  <nav id="main-nav"><a href="#identificar">Identificar</a><a href="#coleccion">Colección</a><a href="#banco-visual">Banco visual</a><a href="#proyecto">El proyecto</a></nav>
   <a class="toplink" href="#identificar">ABRIR EXPLORADOR ↗</a>
   <button id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
 </header>
@@ -77,6 +77,16 @@
     <p class="small-note">Las fichas sin fotografía propia se muestran como referencias textuales. No se atribuyen imágenes ni procedencias que no hayan sido verificadas.</p>
   </section>
 
+  <section id="banco-visual" class="section commons-section">
+    <label class="eyebrow">05 — BANCO VISUAL · PRESELECCIÓN</label>
+    <h2>Construye el <em>archivo de muestras.</em></h2>
+    <p class="section-lead">Busca fotografías en Wikimedia Commons y revisa su autoría, licencia y página original. Los resultados son candidatos: no se incorporan al entrenamiento hasta que una persona confirme la identificación y los permisos.</p>
+    <div class="commons-controls"><label>Mineral que estás documentando<select id="commons-class"><option value="MIN-001|Cuarzo">Cuarzo</option><option value="MIN-002|Calcita">Calcita</option><option value="MIN-003|Yeso">Yeso</option><option value="MIN-004|Halita">Halita</option><option value="MIN-005|Moscovita">Moscovita</option><option value="MIN-006|Biotita">Biotita</option></select></label><label>Buscar fotografías<input id="commons-query" type="search" value="quartz mineral specimen" placeholder="Ej. quartz mineral specimen"></label><button class="btn" id="commons-search">BUSCAR EN COMMONS ↗</button></div>
+    <div class="commons-status" id="commons-status" aria-live="polite">Elige una categoría y busca fotografías para revisarlas.</div><div id="commons-results" class="commons-grid"></div>
+    <div class="commons-export"><div><b>Cola de revisión: <span id="commons-count">0</span> candidatos</b><p>La exportación genera filas pendientes. No asigna un ejemplar físico ni marca ninguna foto como científicamente verificada.</p></div><button class="btn ghost" id="commons-export" disabled>EXPORTAR CSV DE REVISIÓN ↓</button></div>
+    <p class="small-note">Cada archivo de Wikimedia Commons puede tener condiciones distintas. Comprueba siempre la página original y la licencia completa antes de reutilizarlo.</p>
+  </section>
+
   <section id="proyecto" class="project-section">
     <div class="section project-grid">
       <div><label class="eyebrow">03 — SOBRE OQTHERA</label><h2>Ciencia con <em>criterio.</em></h2><p>OQTHERA es una plataforma digital de exploración y aprendizaje sobre la Tierra. Su objetivo es ayudar a observar, comparar y documentar muestras naturales de forma comprensible.</p></div>
@@ -99,4 +109,5 @@
 
 <footer><a class="brand" href="#inicio"><span class="brand-mark">✧</span><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a><p>Explora · Identifica · Descubre</p><small>OQTHERA · PROYECTO EN DESARROLLO</small></footer>
 <script src="app.js"></script>
+<script src="commons-gallery.js"></script>
 </body></html>
