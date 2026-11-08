@@ -1,4 +1,6 @@
 // OQTHERA — exploración científica
+// Estado de IA: aún no hay modelo visual entrenado ni imágenes etiquetadas.
+// Protocolo y clases iniciales: AI_DATASET_PROTOCOL.md y data/mineral-classes.json.
 // La identificación de esta versión es orientativa y basada en reglas.
 // No existe todavía un modelo de visión artificial conectado.
 
