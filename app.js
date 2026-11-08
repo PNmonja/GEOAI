@@ -1,6 +1,6 @@
 
 // ==========================================
-// GEOAI — LABORATORIO CIENTÍFICO
+// CRISLOFAUSRA — LABORATORIO CIENTÍFICO
 // Catálogo, guía mineralógica y acceso a Mindat
 // ==========================================
 
@@ -191,95 +191,117 @@ if (resetButton) resetButton.addEventListener("click", reset);
 draw();
 
 
-// ---------- INTEGRACIÓN INICIAL DE MINDAT ----------
+// ---------- EXPLORADOR VISUAL DE MINERALES ----------
 
-function createMindatSection() {
-  const exploration = document.querySelector("#explorar");
+function createMineralExplorer() {
   const identification = document.querySelector("#identificacion");
-
-  if (!exploration || !identification) return;
-
-  if (document.querySelector("#mindat")) return;
+  if (!identification || document.querySelector("#mineral-explorer")) return;
 
   const section = document.createElement("section");
-
-  section.id = "mindat";
-  section.className = "section";
-
+  section.id = "mineral-explorer";
+  section.className = "section mineral-explorer";
   section.innerHTML = `
-    <label>04 — BASE DE DATOS MINERALÓGICA</label>
-
-    <h2>Consulta la base de datos <em>Mindat.</em></h2>
-
-    <p class="sub">
-      Busca minerales y consulta información mineralógica
-      en una de las principales bases de datos especializadas.
-    </p>
-
-    <div class="toolbar">
-      <div>
-        <label>CONSULTA EXTERNA</label>
-        <h3>Buscar un mineral en Mindat</h3>
-      </div>
-
-      <input
-        id="mindat-search"
-        type="search"
-        placeholder="Ej. cuarzo, calcita, fluorita..."
-        aria-label="Nombre del mineral"
-      >
-
-      <button class="choice" id="mindat-button">
-        BUSCAR EN MINDAT ↗
-      </button>
+    <label>04 — EXPLORADOR MINERALÓGICO</label>
+    <h2>Descubre minerales con <em>CRISLOFAUSRA.</em></h2>
+    <p class="sub">Busca un mineral y consulta fotografías de ejemplares alojadas en Wikimedia Commons. También podrás abrir su búsqueda en Mindat.</p>
+    <div class="toolbar mineral-toolbar">
+      <div><label>BUSCADOR VISUAL</label><h3>¿Qué mineral quieres explorar?</h3></div>
+      <input id="visual-search" type="search" placeholder="Ej. cuarzo, fluorita, calcita..." aria-label="Buscar mineral">
+      <button class="choice" id="visual-search-button">BUSCAR FOTOGRAFÍAS</button>
     </div>
-
-    <p class="note">
-      La búsqueda se realiza en la web de Mindat.
-      GEOAI no descarga ni verifica automáticamente sus datos.
-    </p>
-
-    <a
-      class="btn ghost"
-      href="https://www.mindat.org/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      VISITAR MINDAT ↗
-    </a>
+    <p id="visual-status" class="note" aria-live="polite">Prueba con cuarzo, amatista, calcita o fluorita.</p>
+    <div id="visual-results" class="visual-results"></div>
+    <div class="mindat-reference">
+      <div><small>REFERENCIA MINERALÓGICA</small><h3>Consultar Mindat</h3><p>Abre la búsqueda del mineral en Mindat para consultar sus fichas y referencias.</p></div>
+      <a id="mindat-link" class="btn ghost" href="https://www.mindat.org/" target="_blank" rel="noopener noreferrer">ABRIR MINDAT ↗</a>
+    </div>
+    <p class="note">Las fotografías proceden de Wikimedia Commons. Consulta la autoría y licencia de cada archivo en su ficha original. La galería no identifica automáticamente una muestra.</p>
   `;
-
   identification.parentNode.insertBefore(section, identification);
 
-  const input = section.querySelector("#mindat-search");
-  const button = section.querySelector("#mindat-button");
+  const input = section.querySelector("#visual-search");
+  const button = section.querySelector("#visual-search-button");
+  const status = section.querySelector("#visual-status");
+  const results = section.querySelector("#visual-results");
+  const mindatLink = section.querySelector("#mindat-link");
 
-  function searchMindat() {
-    const mineral = input.value.trim();
-
-    if (!mineral) {
-      input.focus();
-      return;
-    }
-
-    const url =
-      "https://www.mindat.org/search.php?search=" +
-      encodeURIComponent(mineral);
-
-    window.open(url, "_blank", "noopener,noreferrer");
+  function safeText(value) {
+    return String(value || "").replace(/[&<>"']/g, char => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    }[char]));
   }
 
-  button.addEventListener("click", searchMindat);
+  async function searchImages() {
+    const term = input.value.trim();
+    if (!term) { input.focus(); return; }
 
-  input.addEventListener("keydown", event => {
-    if (event.key === "Enter") {
-      searchMindat();
+    status.textContent = "Buscando fotografías y datos de licencia...";
+    results.innerHTML = "";
+    mindatLink.href = "https://www.mindat.org/search.php?search=" + encodeURIComponent(term);
+    button.disabled = true;
+
+    try {
+      const params = new URLSearchParams({
+        action: "query",
+        generator: "search",
+        gsrsearch: "filetype:bitmap " + term + " mineral specimen",
+        gsrnamespace: "6",
+        gsrlimit: "8",
+        prop: "imageinfo",
+        iiprop: "url|extmetadata",
+        iiurlwidth: "640",
+        format: "json",
+        origin: "*"
+      });
+
+      const response = await fetch("https://commons.wikimedia.org/w/api.php?" + params);
+      if (!response.ok) throw new Error("No se pudo consultar Wikimedia Commons.");
+
+      const json = await response.json();
+      const pages = Object.values(json.query?.pages || {});
+      const items = pages.filter(page => page.imageinfo?.[0]?.thumburl || page.imageinfo?.[0]?.url);
+
+      if (!items.length) {
+        status.textContent = "No se encontraron fotografías. Prueba con otro nombre o en inglés.";
+        return;
+      }
+
+      results.innerHTML = items.map(page => {
+        const info = page.imageinfo[0];
+        const meta = info.extmetadata || {};
+        const author = meta.Artist?.value || "Autor no indicado";
+        const license = meta.LicenseShortName?.value || "Licencia no indicada";
+        const source = info.descriptionurl || info.url;
+        const image = info.thumburl || info.url;
+        return `
+          <article class="visual-card">
+            <a href="${safeText(source)}" target="_blank" rel="noopener noreferrer">
+              <img src="${safeText(image)}" alt="Fotografía relacionada con ${safeText(term)}" loading="lazy">
+            </a>
+            <div class="visual-card-info">
+              <h4>${safeText(page.title.replace(/^File:/, ""))}</h4>
+              <p>Autoría: ${safeText(author.replace(/<[^>]*>/g, ""))}</p>
+              <small>Licencia: ${safeText(license)}</small>
+              <a href="${safeText(source)}" target="_blank" rel="noopener noreferrer">Ver archivo y atribución ↗</a>
+            </div>
+          </article>`;
+      }).join("");
+
+      status.textContent = "Se han encontrado " + items.length + " fotografías. Consulta la licencia y atribución de cada archivo.";
+    } catch (error) {
+      status.textContent = "No se pudo cargar la galería. Comprueba tu conexión e inténtalo de nuevo.";
+    } finally {
+      button.disabled = false;
     }
+  }
+
+  button.addEventListener("click", searchImages);
+  input.addEventListener("keydown", event => {
+    if (event.key === "Enter") searchImages();
   });
 }
 
-createMindatSection();
-
+createMineralExplorer();
 
 // ---------- MENÚ PARA MÓVILES ----------
 
