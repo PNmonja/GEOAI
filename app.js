@@ -67,9 +67,9 @@ function renderQuestion(){
 function scoreMineral(m){
  let score=0,known=0;
  const h=answers.hardness,l=answers.luster,s=answers.streak,c=answers.cleavage;
- if(h!=="unknown"){known++;if(m.name==="Cuarzo"&&h==="high")score+=2;if(m.name==="Calcita"&&h==="low")score+=2;if(m.name==="Yeso"&&h==="low")score+=2;if(m.name==="Halita"&&h==="low")score+=2;if((m.name==="Moscovita"||m.name==="Biotita")&&h==="low")score+=2;if(m.name==="Feldespatos"&&h==="high")score+=2}
- if(l!=="unknown"){known++;if(l==="nonmetal"||l==="pearly")score+=1}
- if(s!=="unknown"){known++;if(s==="light")score+=1}
+ if(h!=="unknown"){known++;if(m.name==="Cuarzo"&&h==="high")score+=3;if(["Calcita","Yeso","Halita","Moscovita","Biotita"].includes(m.name)&&h==="low")score+=2;}
+ if(l!=="unknown"){known++;if(l==="pearly"&&(m.name==="Moscovita"||m.name==="Biotita"))score+=1;}
+ if(s!=="unknown"){known++; /* La raya clara es común a estas clases y no discrimina por sí sola. */ }
  if(c!=="unknown"){known++;if((m.name==="Moscovita"||m.name==="Biotita")&&c==="sheets")score+=3;if((m.name==="Calcita"||m.name==="Halita")&&c==="planes")score+=2;if(m.name==="Cuarzo"&&c==="fracture")score+=2}
  return {score,known};
 }
