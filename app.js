@@ -77,10 +77,13 @@ function showResult(){
  const anyKnown=Object.values(answers).some(v=>v!=="unknown");
  if(!anyKnown){questionArea.innerHTML=`<div class="result-card"><span class="result-label">SIN INFORMACIÓN SUFICIENTE</span><h3>No es posible orientar la identificación.</h3><p>Necesitamos al menos una propiedad observable. Puedes reiniciar la guía cuando tengas más información.</p><button class="btn" id="try-again">VOLVER A EMPEZAR</button></div>`;document.querySelector("#try-again").addEventListener("click",restart);return}
  const ranked=minerals.filter(m=>m.type==="Mineral").map(m=>({m,...scoreMineral(m)})).filter(x=>x.known>0).sort((a,b)=>b.score-a.score);
- const top=ranked.filter(x=>x.score===ranked[0].score).slice(0,3);
  const uncertain=Object.values(answers).filter(v=>v==="unknown").length;
- const heading=top[0].score===0?"No hay coincidencia clara":"Posibilidades para contrastar";
- questionArea.innerHTML=`<div class="result-card"><span class="result-label">IDENTIFICACIÓN ORIENTATIVA</span><h3>${heading}</h3><p>La guía no confirma una especie mineral. Estas opciones son referencias iniciales, no probabilidades de acierto.</p><div class="candidate-list">${top.map(x=>`<article><b>${x.m.name}</b><span>${x.m.formula}</span><p>${x.m.description}</p><small>Contrasta: ${x.m.confusions}</small><a href="${x.m.mindat}" target="_blank" rel="noopener noreferrer">Consultar ficha externa ↗</a></article>`).join("")}</div><p class="result-caution">${uncertain? "Hay propiedades sin determinar; el resultado es especialmente limitado.":"Comprueba las propiedades en una fuente fiable o con una persona especialista."} Si ninguna opción encaja, no fuerces una identificación.</p><button class="btn" id="try-again">NUEVA OBSERVACIÓN ↺</button></div>`;
+ const bestScore=ranked.length?ranked[0].score:0;
+ // No mostramos minerales elegidos por el orden del catálogo cuando ninguna propiedad los respalda.
+ const top=bestScore>0?ranked.filter(x=>x.score===bestScore):[];
+ const heading=top.length?"Posibilidades compatibles para contrastar":"Información insuficiente para orientar la identificación";
+ const candidatesHtml=top.length?`<div class="candidate-list">${top.map(x=>`<article><b>${x.m.name}</b><span>${x.m.formula}</span><p>${x.m.description}</p><small>Posibles confusiones: ${x.m.confusions}</small><a href="${x.m.mindat}" target="_blank" rel="noopener noreferrer">Consultar referencia externa ↗</a></article>`).join("")}</div>`:`<p>No hay una coincidencia respaldada por las propiedades seleccionadas. No mostraremos minerales al azar. Observa otras características o consulta una persona especialista.</p>`;
+ questionArea.innerHTML=`<div class="result-card"><span class="result-label">ORIENTACIÓN PRELIMINAR · NO ES UN DIAGNÓSTICO</span><h3>${heading}</h3><p>La guía compara algunas propiedades declaradas. No calcula probabilidades ni confirma la identidad de una muestra.</p>${candidatesHtml}<p class="result-caution">${uncertain? "Hay propiedades sin determinar; la orientación es especialmente limitada.":"Las propiedades usadas son insuficientes para confirmar un mineral."} Si ninguna opción encaja, no fuerces una identificación.</p><button class="btn" id="try-again">NUEVA OBSERVACIÓN ↺</button></div>`;
  document.querySelector("#try-again").addEventListener("click",restart);
 }
 function restart(){stepIndex=0;answers={};renderQuestion()}
