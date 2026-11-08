@@ -1,326 +1,96 @@
+// OQTHERA — exploración científica
+// La identificación de esta versión es orientativa y basada en reglas.
+// No existe todavía un modelo de visión artificial conectado.
 
-// ==========================================
-// CRISLOFAUSRA — LABORATORIO CIENTÍFICO
-// Catálogo, guía mineralógica y acceso a Mindat
-// ==========================================
-
-// ---------- CATÁLOGO DE MUESTRAS ----------
-
-const data = [
-  ["Granito", "Roca", "Ígnea · plutónica", "Roca formada por el enfriamiento lento del magma en profundidad.", "◈"],
-  ["Basalto", "Roca", "Ígnea · volcánica", "Roca volcánica de grano fino, común en coladas de lava.", "⬟"],
-  ["Cuarzo", "Mineral", "Silicato · SiO₂", "Mineral de dureza 7 en la escala de Mohs y brillo vítreo.", "◇"],
-  ["Calcita", "Mineral", "Carbonato · CaCO₃", "Mineral frecuente con exfoliación característica.", "✧"],
-  ["Ammonites", "Fósil", "Cefalópodos extintos", "Moluscos marinos fósiles con concha enrollada.", "◎"],
-  ["Trilobites", "Fósil", "Artrópodos paleozoicos", "Artrópodos marinos extintos del Paleozoico.", "✺"]
+const minerals = [
+  {name:"Cuarzo",type:"Mineral",formula:"SiO₂",group:"Silicatos · tectosilicatos",hardness:"7",luster:"Vítreo",streak:"Blanca",cleavage:"Sin exfoliación; fractura concoidea frecuente",description:"Mineral muy común, presente en numerosas rocas. Puede aparecer en cristales prismáticos o en masas.",confusions:"Calcita y feldespatos en muestras masivas.",mindat:"https://www.mindat.org/min-3337.html"},
+  {name:"Calcita",type:"Mineral",formula:"CaCO₃",group:"Carbonatos",hardness:"3",luster:"Vítreo a nacarado",streak:"Blanca",cleavage:"Exfoliación romboédrica marcada",description:"Carbonato frecuente en calizas y mármoles. Puede presentar cristales con formas variadas.",confusions:"Cuarzo, dolomita y otros carbonatos.",mindat:"https://www.mindat.org/min-859.html"},
+  {name:"Yeso",type:"Mineral",formula:"CaSO₄·2H₂O",group:"Sulfatos",hardness:"2",luster:"Vítreo a sedoso",streak:"Blanca",cleavage:"Exfoliación muy buena",description:"Mineral evaporítico de baja dureza. Puede aparecer en cristales, masas o variedades fibrosas.",confusions:"Calcita y halita en muestras claras.",mindat:"https://www.mindat.org/min-1784.html"},
+  {name:"Halita",type:"Mineral",formula:"NaCl",group:"Haluros",hardness:"2–2,5",luster:"Vítreo",streak:"Blanca",cleavage:"Exfoliación cúbica",description:"Mineral evaporítico que forma cristales cúbicos y puede ser transparente o presentar coloraciones.",confusions:"Calcita y yeso; no debe probarse por sabor para identificarla.",mindat:"https://www.mindat.org/min-1804.html"},
+  {name:"Micas",type:"Mineral",formula:"Grupo de aluminosilicatos",group:"Silicatos · filosilicatos",hardness:"2–3",luster:"Vítreo a nacarado",streak:"Blanca",cleavage:"Exfoliación basal perfecta en láminas",description:"Grupo de minerales que se separan en láminas finas y flexibles. Incluye, entre otros, moscovita y biotita.",confusions:"Otros minerales laminares.",mindat:"https://www.mindat.org/min-2715.html"},
+  {name:"Feldespatos",type:"Mineral",formula:"Aluminosilicatos de K, Na y Ca",group:"Silicatos · tectosilicatos",hardness:"6",luster:"Vítreo",streak:"Blanca",cleavage:"Dos direcciones de exfoliación",description:"Grupo muy abundante en la corteza terrestre. Incluye feldespatos potásicos y plagioclasas.",confusions:"Cuarzo, especialmente en fragmentos claros.",mindat:"https://www.mindat.org/min-_feldspar.html"},
+  {name:"Granito",type:"Roca",formula:"Composición variable",group:"Ígnea · plutónica",hardness:"Variable",luster:"Aspecto granular",streak:"No aplicable como criterio único",cleavage:"No aplicable",description:"Roca ígnea plutónica generalmente compuesta por cuarzo, feldespatos y micas. Su identificación requiere observar la textura y los minerales presentes.",confusions:"Otras rocas plutónicas de aspecto claro.",mindat:"https://www.mindat.org/"},
+  {name:"Basalto",type:"Roca",formula:"Composición máfica",group:"Ígnea · volcánica",hardness:"Variable",luster:"Generalmente mate",streak:"No aplicable como criterio único",cleavage:"No aplicable",description:"Roca volcánica de grano habitualmente fino, común en coladas de lava. Puede contener minerales que no se distinguen a simple vista.",confusions:"Otras rocas volcánicas oscuras.",mindat:"https://www.mindat.org/"}
 ];
 
-const search = document.querySelector("#search");
-const filter = document.querySelector("#filter");
-const samples = document.querySelector("#samples");
+const samples=document.querySelector("#samples");
+const search=document.querySelector("#search");
+const filter=document.querySelector("#filter");
 
-function render() {
-  if (!search || !filter || !samples) return;
-
-  const q = search.value.toLowerCase();
-
-  const rows = data.filter(x =>
-    (filter.value === "Todos" || x[1] === filter.value) &&
-    x.join(" ").toLowerCase().includes(q)
-  );
-
-  samples.innerHTML = rows.length
-    ? rows.map(x => `
-      <article class="sample">
-        <div class="symbol">${x[4]}</div>
-        <small>${x[1].toUpperCase()}</small>
-        <h4>${x[0]}</h4>
-        <p>${x[3]}</p>
-        <span class="tag">${x[2]}</span>
-      </article>
-    `).join("")
-    : "<p>No se encontraron muestras.</p>";
+function renderSamples(){
+  if(!samples)return;
+  const q=(search?.value||"").trim().toLocaleLowerCase("es");
+  const category=filter?.value||"Todos";
+  const found=minerals.filter(m=>(category==="Todos"||m.type===category)&&Object.values(m).join(" ").toLocaleLowerCase("es").includes(q));
+  samples.innerHTML=found.length?found.map(m=>`
+    <article class="sample-card">
+      <div class="sample-top"><span>${m.type.toUpperCase()}</span><span>OQ / REF</span></div>
+      <div class="sample-glyph">${m.type==="Roca"?"▧":"◇"}</div>
+      <h3>${m.name}</h3><p class="formula">${m.formula}</p><p>${m.description}</p>
+      <dl><div><dt>Dureza</dt><dd>${m.hardness}</dd></div><div><dt>Brillo</dt><dd>${m.luster}</dd></div><div><dt>Raya</dt><dd>${m.streak}</dd></div></dl>
+      <p class="confusions"><b>Posibles confusiones:</b> ${m.confusions}</p>
+      <a class="reference-link" href="${m.mindat}" target="_blank" rel="noopener noreferrer">Consultar referencia externa ↗</a>
+    </article>`).join(""):"<p class='empty-state'>No hay resultados para esa búsqueda. Prueba otro término.</p>";
 }
+search?.addEventListener("input",renderSamples);
+filter?.addEventListener("change",renderSamples);
+renderSamples();
 
-if (search) search.addEventListener("input", render);
-if (filter) filter.addEventListener("change", render);
+// Guía de propiedades: no usa fotografías ni afirma reconocer imágenes.
+const questions=[
+ {title:"¿Qué tipo de brillo observas?",help:"Mira la superficie con luz normal. No uses una llama ni productos químicos.",key:"luster",options:[["Metálico","metal"],["Vítreo o no metálico","nonmetal"],["Nacarado o sedoso","pearly"],["No puedo determinarlo","unknown"]]},
+ {title:"¿Qué dureza aproximada conoces?",help:"Solo registra una prueba que ya hayas realizado de forma segura. No rayes piezas valiosas.",key:"hardness",options:[["Baja: se raya con la uña","low"],["Media: entre 3 y 5,5","medium"],["Alta: puede rayar vidrio","high"],["No lo sé","unknown"]]},
+ {title:"¿Conoces el color de la raya?",help:"La raya es el color del polvo del mineral; no es lo mismo que el color externo.",key:"streak",options:[["Blanca o clara","light"],["Oscura o coloreada","dark"],["No se ha comprobado","unknown"]]},
+ {title:"¿Has observado exfoliación o forma de rotura?",help:"La exfoliación produce superficies planas repetidas. Si no lo distingues, elige que no lo sabes.",key:"cleavage",options:[["Láminas finas","sheets"],["Bloques o planos definidos","planes"],["Fractura irregular o curva","fracture"],["No lo sé","unknown"]]}
+];
+let stepIndex=0;
+let answers={};
+const questionArea=document.querySelector("#question-area");
+const stepCount=document.querySelector("#step-count");
+const progress=document.querySelector("#progress");
+const back=document.querySelector("#back");
 
-document.querySelectorAll(".domains button").forEach(button => {
-  button.addEventListener("click", () => {
-    if (!filter) return;
+function renderQuestion(){
+ if(!questionArea)return;
+ const q=questions[stepIndex];
+ stepCount.textContent=`PASO 0${stepIndex+1} / 04`;
+ progress.style.width=((stepIndex+1)/4*100)+"%";
+ back.disabled=stepIndex===0;
+ questionArea.innerHTML=`<h3>${q.title}</h3><p>${q.help}</p><div class="answers">${q.options.map(([label,value])=>`<button class="answer ${answers[q.key]===value?"selected":""}" data-value="${value}">${label}<span>→</span></button>`).join("")}</div>`;
+ questionArea.querySelectorAll(".answer").forEach(btn=>btn.addEventListener("click",()=>{
+   answers[q.key]=btn.dataset.value;
+   if(stepIndex<questions.length-1){stepIndex++;renderQuestion()}else showResult();
+ }));
+}
+function scoreMineral(m){
+ let score=0,known=0;
+ const h=answers.hardness,l=answers.luster,s=answers.streak,c=answers.cleavage;
+ if(h!=="unknown"){known++;if(m.name==="Cuarzo"&&h==="high")score+=2;if(m.name==="Calcita"&&h==="low")score+=2;if(m.name==="Yeso"&&h==="low")score+=2;if(m.name==="Halita"&&h==="low")score+=2;if(m.name==="Micas"&&h==="low")score+=2;if(m.name==="Feldespatos"&&h==="high")score+=2}
+ if(l!=="unknown"){known++;if(l==="nonmetal"||l==="pearly")score+=1}
+ if(s!=="unknown"){known++;if(s==="light")score+=1}
+ if(c!=="unknown"){known++;if(m.name==="Micas"&&c==="sheets")score+=3;if((m.name==="Calcita"||m.name==="Halita"||m.name==="Feldespatos")&&c==="planes")score+=2;if(m.name==="Cuarzo"&&c==="fracture")score+=2}
+ return {score,known};
+}
+function showResult(){
+ const anyKnown=Object.values(answers).some(v=>v!=="unknown");
+ if(!anyKnown){questionArea.innerHTML=`<div class="result-card"><span class="result-label">SIN INFORMACIÓN SUFICIENTE</span><h3>No es posible orientar la identificación.</h3><p>Necesitamos al menos una propiedad observable. Puedes reiniciar la guía cuando tengas más información.</p><button class="btn" id="try-again">VOLVER A EMPEZAR</button></div>`;document.querySelector("#try-again").addEventListener("click",restart);return}
+ const ranked=minerals.filter(m=>m.type==="Mineral").map(m=>({m,...scoreMineral(m)})).filter(x=>x.known>0).sort((a,b)=>b.score-a.score);
+ const top=ranked.filter(x=>x.score===ranked[0].score).slice(0,3);
+ const uncertain=Object.values(answers).filter(v=>v==="unknown").length;
+ const heading=top[0].score===0?"No hay coincidencia clara":"Posibilidades para contrastar";
+ questionArea.innerHTML=`<div class="result-card"><span class="result-label">IDENTIFICACIÓN ORIENTATIVA</span><h3>${heading}</h3><p>La guía no confirma una especie mineral. Estas opciones son referencias iniciales, no probabilidades de acierto.</p><div class="candidate-list">${top.map(x=>`<article><b>${x.m.name}</b><span>${x.m.formula}</span><p>${x.m.description}</p><small>Contrasta: ${x.m.confusions}</small><a href="${x.m.mindat}" target="_blank" rel="noopener noreferrer">Consultar ficha externa ↗</a></article>`).join("")}</div><p class="result-caution">${uncertain? "Hay propiedades sin determinar; el resultado es especialmente limitado.":"Comprueba las propiedades en una fuente fiable o con una persona especialista."} Si ninguna opción encaja, no fuerces una identificación.</p><button class="btn" id="try-again">NUEVA OBSERVACIÓN ↺</button></div>`;
+ document.querySelector("#try-again").addEventListener("click",restart);
+}
+function restart(){stepIndex=0;answers={};renderQuestion()}
+back?.addEventListener("click",()=>{if(stepIndex>0){stepIndex--;renderQuestion()}});
+document.querySelector("#restart")?.addEventListener("click",restart);
+renderQuestion();
 
-    filter.value = button.dataset.filter;
-    render();
-
-    samples.scrollIntoView({ behavior: "smooth" });
-  });
+// Navegación móvil accesible.
+const menu=document.querySelector("#menu");
+const nav=document.querySelector("#main-nav");
+menu?.addEventListener("click",()=>{
+ const open=nav.classList.toggle("nav-open");
+ menu.setAttribute("aria-expanded",String(open));
 });
-
-render();
-
-
-// ---------- GUÍA DE IDENTIFICACIÓN MINERALÓGICA ----------
-
-const steps = [
-  [
-    "¿Qué brillo presenta la muestra?",
-    "Observa cómo refleja la luz.",
-    [
-      ["Metálico", "metal"],
-      ["No metálico", "nonmetal"],
-      ["No estoy seguro", "unknown"]
-    ]
-  ],
-  [
-    "¿Qué dureza aproximada tiene?",
-    "No realices pruebas sobre piezas valiosas o desconocidas.",
-    [
-      ["Baja: se raya con la uña", "soft"],
-      ["Media", "medium"],
-      ["Alta: puede rayar vidrio", "hard"],
-      ["No lo sé", "unknown"]
-    ]
-  ],
-  [
-    "¿Qué aspecto tiene la raya?",
-    "La raya es el color del polvo del mineral.",
-    [
-      ["Blanca o clara", "light"],
-      ["Oscura", "dark"],
-      ["No lo he comprobado", "unknown"]
-    ]
-  ]
-];
-
-let n = 0;
-let answers = [];
-
-const question = document.querySelector("#question");
-const step = document.querySelector("#step");
-const progress = document.querySelector("#progress");
-const back = document.querySelector("#back");
-
-function draw() {
-  if (!question || !step || !progress || !back) return;
-
-  const s = steps[n];
-
-  step.textContent = `PASO 0${n + 1} DE 03`;
-  progress.style.width = ((n + 1) / 3 * 100) + "%";
-  back.disabled = n === 0;
-
-  question.innerHTML = `
-    <h3>${s[0]}</h3>
-    <p>${s[1]}</p>
-    ${s[2].map(a => `
-      <button class="choice" data-v="${a[1]}">
-        ${a[0]} →
-      </button>
-    `).join("")}
-  `;
-
-  question.querySelectorAll(".choice").forEach(button => {
-    button.addEventListener("click", () => {
-      answers[n] = button.dataset.v;
-
-      if (n < 2) {
-        n++;
-        draw();
-      } else {
-        result();
-      }
-    });
-  });
-}
-
-function result() {
-  let title = "Resultado no concluyente";
-  let desc = "Las respuestas no permiten orientar una identificación concreta. Registra más propiedades y consulta una referencia especializada.";
-
-  if (
-    answers[0] === "nonmetal" &&
-    answers[1] === "hard" &&
-    answers[2] === "light"
-  ) {
-    title = "Cuarzo: una posibilidad para contrastar";
-    desc = "El cuarzo suele presentar brillo vítreo, dureza 7 y raya blanca. Esta combinación no confirma por sí sola la identificación.";
-  } else if (
-    answers[0] === "nonmetal" &&
-    answers[1] === "soft"
-  ) {
-    title = "Mineral de baja dureza";
-    desc = "Talco o yeso son ejemplos de minerales blandos. Se necesitan más observaciones para diferenciarlos.";
-  } else if (
-    answers[0] === "metal" &&
-    answers[1] === "soft"
-  ) {
-    title = "Posible mineral de brillo metálico";
-    desc = "Algunos sulfuros pueden presentar estas propiedades. Contrasta raya, densidad y otras características.";
-  }
-
-  question.innerHTML = `
-    <div class="result">
-      <b>${title}</b>
-      <p>${desc}</p>
-      <small>Orientación educativa · No es un diagnóstico mineralógico.</small>
-    </div>
-    <button class="choice" id="again">Volver a empezar ↺</button>
-  `;
-
-  document.querySelector("#again").addEventListener("click", reset);
-}
-
-function reset() {
-  n = 0;
-  answers = [];
-  draw();
-}
-
-if (back) {
-  back.addEventListener("click", () => {
-    if (n > 0) {
-      n--;
-      draw();
-    }
-  });
-}
-
-const resetButton = document.querySelector("#reset");
-if (resetButton) resetButton.addEventListener("click", reset);
-
-draw();
-
-
-// ---------- EXPLORADOR VISUAL DE MINERALES ----------
-
-function createMineralExplorer() {
-  const identification = document.querySelector("#identificacion");
-  if (!identification || document.querySelector("#mineral-explorer")) return;
-
-  const section = document.createElement("section");
-  section.id = "mineral-explorer";
-  section.className = "section mineral-explorer";
-  section.innerHTML = `
-    <label>04 — EXPLORADOR MINERALÓGICO</label>
-    <h2>Descubre minerales con <em>CRISLOFAUSRA.</em></h2>
-    <p class="sub">Busca un mineral y consulta fotografías de ejemplares alojadas en Wikimedia Commons. También podrás abrir su búsqueda en Mindat.</p>
-    <div class="toolbar mineral-toolbar">
-      <div><label>BUSCADOR VISUAL</label><h3>¿Qué mineral quieres explorar?</h3></div>
-      <input id="visual-search" type="search" placeholder="Ej. cuarzo, fluorita, calcita..." aria-label="Buscar mineral">
-      <button class="choice" id="visual-search-button">BUSCAR FOTOGRAFÍAS</button>
-    </div>
-    <p id="visual-status" class="note" aria-live="polite">Prueba con cuarzo, amatista, calcita o fluorita.</p>
-    <div id="visual-results" class="visual-results"></div>
-    <div class="mindat-reference">
-      <div><small>REFERENCIA MINERALÓGICA</small><h3>Consultar Mindat</h3><p>Abre la búsqueda del mineral en Mindat para consultar sus fichas y referencias.</p></div>
-      <a id="mindat-link" class="btn ghost" href="https://www.mindat.org/" target="_blank" rel="noopener noreferrer">ABRIR MINDAT ↗</a>
-    </div>
-    <p class="note">Las fotografías proceden de Wikimedia Commons. Consulta la autoría y licencia de cada archivo en su ficha original. La galería no identifica automáticamente una muestra.</p>
-  `;
-  identification.parentNode.insertBefore(section, identification);
-
-  const input = section.querySelector("#visual-search");
-  const button = section.querySelector("#visual-search-button");
-  const status = section.querySelector("#visual-status");
-  const results = section.querySelector("#visual-results");
-  const mindatLink = section.querySelector("#mindat-link");
-
-  function safeText(value) {
-    return String(value || "").replace(/[&<>"']/g, char => ({
-      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-    }[char]));
-  }
-
-  async function searchImages() {
-    const term = input.value.trim();
-    if (!term) { input.focus(); return; }
-
-    status.textContent = "Buscando fotografías y datos de licencia...";
-    results.innerHTML = "";
-    mindatLink.href = "https://www.mindat.org/search.php?search=" + encodeURIComponent(term);
-    button.disabled = true;
-
-    try {
-      const params = new URLSearchParams({
-        action: "query",
-        generator: "search",
-        gsrsearch: "filetype:bitmap " + term + " mineral specimen",
-        gsrnamespace: "6",
-        gsrlimit: "8",
-        prop: "imageinfo",
-        iiprop: "url|extmetadata",
-        iiurlwidth: "640",
-        format: "json",
-        origin: "*"
-      });
-
-      const response = await fetch("https://commons.wikimedia.org/w/api.php?" + params);
-      if (!response.ok) throw new Error("No se pudo consultar Wikimedia Commons.");
-
-      const json = await response.json();
-      const pages = Object.values(json.query?.pages || {});
-      const items = pages.filter(page => page.imageinfo?.[0]?.thumburl || page.imageinfo?.[0]?.url);
-
-      if (!items.length) {
-        status.textContent = "No se encontraron fotografías. Prueba con otro nombre o en inglés.";
-        return;
-      }
-
-      results.innerHTML = items.map(page => {
-        const info = page.imageinfo[0];
-        const meta = info.extmetadata || {};
-        const author = meta.Artist?.value || "Autor no indicado";
-        const license = meta.LicenseShortName?.value || "Licencia no indicada";
-        const source = info.descriptionurl || info.url;
-        const image = info.thumburl || info.url;
-        return `
-          <article class="visual-card">
-            <a href="${safeText(source)}" target="_blank" rel="noopener noreferrer">
-              <img src="${safeText(image)}" alt="Fotografía relacionada con ${safeText(term)}" loading="lazy">
-            </a>
-            <div class="visual-card-info">
-              <h4>${safeText(page.title.replace(/^File:/, ""))}</h4>
-              <p>Autoría: ${safeText(author.replace(/<[^>]*>/g, ""))}</p>
-              <small>Licencia: ${safeText(license)}</small>
-              <a href="${safeText(source)}" target="_blank" rel="noopener noreferrer">Ver archivo y atribución ↗</a>
-            </div>
-          </article>`;
-      }).join("");
-
-      status.textContent = "Se han encontrado " + items.length + " fotografías. Consulta la licencia y atribución de cada archivo.";
-    } catch (error) {
-      status.textContent = "No se pudo cargar la galería. Comprueba tu conexión e inténtalo de nuevo.";
-    } finally {
-      button.disabled = false;
-    }
-  }
-
-  button.addEventListener("click", searchImages);
-  input.addEventListener("keydown", event => {
-    if (event.key === "Enter") searchImages();
-  });
-}
-
-createMineralExplorer();
-
-// ---------- MENÚ PARA MÓVILES ----------
-
-const menuButton = document.querySelector("#menu");
-
-if (menuButton) {
-  menuButton.addEventListener("click", () => {
-    const nav = document.querySelector("nav");
-
-    if (!nav) return;
-
-    nav.style.display =
-      nav.style.display === "flex" ? "none" : "flex";
-
-    nav.style.position = "absolute";
-    nav.style.top = "70px";
-    nav.style.right = "20px";
-    nav.style.background = "#0b1e2b";
-    nav.style.padding = "18px";
-    nav.style.flexDirection = "column";
-  });
-}
+nav?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("nav-open");menu?.setAttribute("aria-expanded","false")}));
