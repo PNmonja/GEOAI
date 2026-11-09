@@ -16,7 +16,7 @@ Fuera de alcance por ahora: identificación detallada de fósiles, prospección 
 | MIN-003 | Yeso | CaSO₄·2H₂O | Solo etiquetas verificadas |
 | MIN-004 | Halita | NaCl | Sin pruebas de sabor |
 | MIN-005 | Moscovita | KAl₂(AlSi₃O₁₀)(OH)₂ | No usar «mica» como etiqueta genérica |
-| MIN-006 | Biotita | K(Mg,Fe)₃AlSi₃O₁₀(F,OH)₂ | Identificación respaldada por referencia |
+| MIN-006 | Biotita (grupo) | K(Fe²⁺/Mg)₂(Al/Fe³⁺/Mg/Ti)([Si/Al/Fe]₂Si₂O₁₀)(OH/F)₂ | Grupo de micas; no tratar como una especie única |
 
 Feldespatos, otras especies y rocas se aplazan hasta validar estas seis clases.
 
