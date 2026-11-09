@@ -9,7 +9,7 @@
     {"class_id":"MIN-003","label":"Yeso","formula":"CaSO4·2H2O"},
     {"class_id":"MIN-004","label":"Halita","formula":"NaCl"},
     {"class_id":"MIN-005","label":"Moscovita","formula":"KAl2(AlSi3O10)(OH)2"},
-    {"class_id":"MIN-006","label":"Biotita","formula":"K(Mg,Fe)3AlSi3O10(F,OH)2"}
+    {"class_id":"MIN-006","label":"Biotita (grupo)","formula":"K(Fe2+/Mg)2(Al/Fe3+/Mg/Ti)([Si/Al/Fe]2Si2O10)(OH/F)2"}
   ],
   "abstention_label": "unknown_or_out_of_scope",
   "out_of_scope_examples": ["other_minerals","rocks","fossils","manufactured_objects","poor_quality_images","non_specimen_images"],
