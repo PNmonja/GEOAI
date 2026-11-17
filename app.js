@@ -4,16 +4,23 @@
 // La identificación de esta versión es orientativa y basada en reglas.
 // No existe todavía un modelo de visión artificial conectado.
 
-const minerals = [
-  {name:"Cuarzo",type:"Mineral",formula:"SiO₂",group:"Silicatos · tectosilicatos",hardness:"7",luster:"Vítreo",streak:"Blanca",cleavage:"Sin exfoliación; fractura concoidea frecuente",description:"Mineral muy común, presente en numerosas rocas. Puede aparecer en cristales prismáticos o en masas.",confusions:"Calcita y feldespatos en muestras masivas.",mindat:"https://www.mindat.org/min-3337.html"},
-  {name:"Calcita",type:"Mineral",formula:"CaCO₃",group:"Carbonatos",hardness:"3",luster:"Vítreo a nacarado",streak:"Blanca",cleavage:"Exfoliación romboédrica marcada",description:"Carbonato frecuente en calizas y mármoles. Puede presentar cristales con formas variadas.",confusions:"Cuarzo, dolomita y otros carbonatos.",mindat:"https://www.mindat.org/min-859.html"},
-  {name:"Yeso",type:"Mineral",formula:"CaSO₄·2H₂O",group:"Sulfatos",hardness:"2",luster:"Vítreo a sedoso",streak:"Blanca",cleavage:"Exfoliación muy buena",description:"Mineral evaporítico de baja dureza. Puede aparecer en cristales, masas o variedades fibrosas.",confusions:"Calcita y halita en muestras claras.",mindat:"https://www.mindat.org/min-1784.html"},
-  {name:"Halita",type:"Mineral",formula:"NaCl",group:"Haluros",hardness:"2–2,5",luster:"Vítreo",streak:"Blanca",cleavage:"Exfoliación cúbica",description:"Mineral evaporítico que forma cristales cúbicos y puede ser transparente o presentar coloraciones.",confusions:"Calcita y yeso; no debe probarse por sabor para identificarla.",mindat:"https://www.mindat.org/min-1804.html"},
-  {name:"Moscovita",type:"Mineral",formula:"KAl₂(AlSi₃O₁₀)(OH)₂",group:"Silicatos · filosilicatos",hardness:"2–2,5",luster:"Vítreo a nacarado",streak:"Blanca",cleavage:"Exfoliación basal perfecta en láminas",description:"Mica clara que suele separarse en láminas finas y flexibles. La identificación requiere observar varias propiedades.",confusions:"Biotita y otros minerales laminares.",mindat:"https://www.mindat.org/min-2815.html"},
-  {name:"Biotita",type:"Mineral",formula:"K(Fe²⁺/Mg)₂(Al/Fe³⁺/Mg/Ti)([Si/Al/Fe]₂Si₂O₁₀)(OH/F)₂",group:"Silicatos · filosilicatos",hardness:"2,5–3",luster:"Vítreo a nacarado",streak:"Blanca a grisácea",cleavage:"Exfoliación basal perfecta en láminas",description:"Mica oscura rica en hierro y magnesio. Presenta exfoliación en láminas; conviene contrastar con otras micas.",confusions:"Moscovita y otros minerales laminares oscuros.",mindat:"https://www.mindat.org/min-677.html"},
-  {name:"Granito",type:"Roca",formula:"Composición variable",group:"Ígnea · plutónica",hardness:"Variable",luster:"Aspecto granular",streak:"No aplicable como criterio único",cleavage:"No aplicable",description:"Roca ígnea plutónica generalmente compuesta por cuarzo, feldespatos y micas. Su identificación requiere observar la textura y los minerales presentes.",confusions:"Otras rocas plutónicas de aspecto claro.",mindat:"https://www.mindat.org/"},
-  {name:"Basalto",type:"Roca",formula:"Composición máfica",group:"Ígnea · volcánica",hardness:"Variable",luster:"Generalmente mate",streak:"No aplicable como criterio único",cleavage:"No aplicable",description:"Roca volcánica de grano habitualmente fino, común en coladas de lava. Puede contener minerales que no se distinguen a simple vista.",confusions:"Otras rocas volcánicas oscuras.",mindat:"https://www.mindat.org/"}
-];
+let minerals = [];
+let catalogReady = false;
+async function loadCatalog(){
+  try {
+    const response = await fetch("data/minerals.json", {cache:"no-cache"});
+    if(!response.ok) throw new Error("HTTP "+response.status);
+    const catalog = await response.json();
+    if(catalog.api_version !== "v1" || !Array.isArray(catalog.items)) throw new Error("Formato de catálogo no válido");
+    minerals = catalog.items;
+    catalogReady = true;
+    renderSamples();
+  } catch(error) {
+    if(samples) samples.innerHTML = "<p class='empty-state'>No se ha podido cargar el catálogo propio de OQTHERA. Inténtalo más tarde.</p>";
+    console.error("OQTHERA catalog:", error);
+  }
+}
+
 
 const samples=document.querySelector("#samples");
 const search=document.querySelector("#search");
@@ -31,12 +38,12 @@ function renderSamples(){
       <h3>${m.name}</h3><p class="formula">${m.formula}</p><p>${m.description}</p>
       <dl><div><dt>Dureza</dt><dd>${m.hardness}</dd></div><div><dt>Brillo</dt><dd>${m.luster}</dd></div><div><dt>Raya</dt><dd>${m.streak}</dd></div></dl>
       <p class="confusions"><b>Posibles confusiones:</b> ${m.confusions}</p>
-      <a class="reference-link" href="${m.mindat}" target="_blank" rel="noopener noreferrer">Consultar referencia externa ↗</a>
+      <span class="reference-link">Ficha propia OQTHERA · ${m.review_status==="verified"?"Revisada":"Pendiente de revisión científica"}</span>
     </article>`).join(""):"<p class='empty-state'>No hay resultados para esa búsqueda. Prueba otro término.</p>";
 }
 search?.addEventListener("input",renderSamples);
 filter?.addEventListener("change",renderSamples);
-renderSamples();
+loadCatalog();
 
 // Guía de propiedades: no usa fotografías ni afirma reconocer imágenes.
 const questions=[
@@ -96,7 +103,7 @@ function showResult(){
  const top=bestScore>0?ranked.filter(x=>x.score===bestScore):[];
  const hasConflict=false;
  const heading=top.length?"Posibilidades compatibles para contrastar":"Información insuficiente para orientar la identificación";
- const candidatesHtml=top.length?`<div class="candidate-list">${top.map(x=>`<article><b>${x.m.name}</b><span>${x.m.formula}</span><p>${x.m.description}</p><small>Posibles confusiones: ${x.m.confusions}</small><a href="${x.m.mindat}" target="_blank" rel="noopener noreferrer">Consultar referencia externa ↗</a></article>`).join("")}</div>`:`<p>${hasConflict?"Una o más propiedades no encajan con las referencias del conjunto inicial de seis minerales.":"No hay una coincidencia respaldada por las propiedades seleccionadas."} No mostraremos minerales al azar. Observa otras características o consulta una persona especialista.</p>`;
+ const candidatesHtml=top.length?`<div class="candidate-list">${top.map(x=>`<article><b>${x.m.name}</b><span>${x.m.formula}</span><p>${x.m.description}</p><small>Posibles confusiones: ${x.m.confusions}</small><span>Ficha propia OQTHERA · pendiente de revisión científica</span></article>`).join("")}</div>`:`<p>${hasConflict?"Una o más propiedades no encajan con las referencias del conjunto inicial de seis minerales.":"No hay una coincidencia respaldada por las propiedades seleccionadas."} No mostraremos minerales al azar. Observa otras características o consulta una persona especialista.</p>`;
  questionArea.innerHTML=`<div class="result-card"><span class="result-label">ORIENTACIÓN PRELIMINAR · NO ES UN DIAGNÓSTICO</span><h3>${heading}</h3><p>La guía compara algunas propiedades declaradas. La dureza se trata solo como una observación orientativa; no calcula probabilidades ni confirma la identidad de una muestra.</p>${candidatesHtml}<p class="result-caution">${uncertain? "Hay propiedades sin determinar; la orientación es especialmente limitada.":"Las propiedades usadas son insuficientes para confirmar un mineral."} Si ninguna opción encaja, no fuerces una identificación.</p><button class="btn" id="try-again">NUEVA OBSERVACIÓN ↺</button></div>`;
  document.querySelector("#try-again").addEventListener("click",restart);
 }
