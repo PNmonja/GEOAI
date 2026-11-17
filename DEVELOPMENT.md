@@ -2,6 +2,7 @@
 
 ## Estado
 - Sitio web estático publicado con GitHub Pages.
+- Catálogo propio servido como JSON versionado en `data/minerals.json` (`/data/minerals.json`); no consulta Mindat ni otra API externa en tiempo de ejecución.
 - Catálogo educativo inicial y guía de propiedades basada en reglas.
 - La guía no es un modelo de IA visual y no analiza imágenes.
 - Protocolo de dataset y manifiesto CSV preparados.
@@ -10,6 +11,7 @@
 
 ## Archivos importantes
 - `index.html`, `styles.css`, `app.js`: web.
+- `data/minerals.json`: fuente propia de datos del catálogo, expuesta como endpoint JSON estático de solo lectura.
 - `assets/oqthera-emblem.svg`: emblema horizontal.
 - `assets/oqthera-mark.svg`: símbolo compacto para navegación.
 - `AI_DATASET_PROTOCOL.md`: protocolo científico del conjunto.
@@ -38,3 +40,11 @@ Los scripts ayudan a detectar errores de organización, pero no certifican la id
 - `ml/README.md`: instrucciones y límites del experimento.
 
 La API de Commons expone metadatos de cada archivo, pero la licencia debe comprobarse en su página original; los archivos pueden tener condiciones distintas. El buscador no descarga ni incorpora imágenes automáticamente al entrenamiento.
+
+## Catálogo/API propia v1
+- Endpoint público de solo lectura: `https://pnmonja.github.io/GEOAI/data/minerals.json`.
+- Versión del formato: `api_version: v1`; versión inicial del conjunto: `0.1.0-draft`.
+- Los registros incluyen identificador, tipo, fórmula, propiedades, descripción, confusiones, estado de revisión y referencias.
+- `review_status=pending` significa que la ficha todavía no ha superado una auditoría documental. No debe mostrarse como dato verificado.
+- GitHub Pages sirve archivos estáticos: esto es una API de lectura estática, no un servidor dinámico. Para búsquedas avanzadas, autenticación, escritura o límites por usuario hará falta un backend propio.
+- No se necesita clave de Mindat y no se realizan peticiones a Mindat desde la aplicación. Las fuentes externas podrán consultarse manualmente para documentar y verificar cada ficha, respetando licencias y atribución.
