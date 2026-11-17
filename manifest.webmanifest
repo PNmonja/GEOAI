@@ -1,0 +1,32 @@
+{
+  "id": "/GEOAI/",
+  "name": "OQTHERA — Exploración científica",
+  "short_name": "OQTHERA",
+  "description": "Explora la Tierra, la vida y la naturaleza mediante observación y documentación científica.",
+  "lang": "es",
+  "start_url": "/GEOAI/?source=pwa",
+  "scope": "/GEOAI/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080d16",
+  "theme_color": "#080d16",
+  "categories": [
+    "education",
+    "science",
+    "books"
+  ],
+  "icons": [
+    {
+      "src": "assets/oqthera-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/oqthera-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
