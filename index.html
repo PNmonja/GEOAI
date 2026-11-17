@@ -15,7 +15,7 @@
 <body>
 <header class="top">
   <a class="brand" href="#inicio" aria-label="OQTHERA, inicio"><img class="brand-logo" src="assets/oqthera-mark.svg" alt=""><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a>
-  <nav id="main-nav"><a href="#identificar">Identificar</a><a href="#coleccion">Colección</a><a href="#banco-visual">Banco visual</a><a href="#proyecto">El proyecto</a></nav>
+  <nav id="main-nav"><a href="#identificar">Identificar</a><a href="#coleccion">Colección</a><a href="#field-explorer">Exploración</a><a href="#botanica">Botánica</a><a href="#emergencias">Emergencias</a><a href="#proyecto">El proyecto</a></nav>
   <a class="toplink" href="#identificar">ABRIR EXPLORADOR ↗</a>
   <button id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
 </header>
@@ -86,6 +86,47 @@
     <div class="commons-status" id="commons-status" aria-live="polite">Elige una categoría y busca fotografías para revisarlas.</div><div id="commons-results" class="commons-grid"></div>
     <div class="commons-export"><div><b>Cola de revisión: <span id="commons-count">0</span> candidatos</b><p>La exportación genera filas pendientes. No asigna un ejemplar físico ni marca ninguna foto como científicamente verificada.</p></div><button class="btn ghost" id="commons-export" disabled>EXPORTAR CSV DE REVISIÓN ↓</button></div>
     <p class="small-note">Cada archivo de Wikimedia Commons puede tener condiciones distintas. Comprueba siempre la página original y la licencia completa antes de reutilizarlo.</p>
+  </section>
+
+
+  <section id="field-explorer" class="section field-section">
+    <label class="eyebrow">06 — OQTHERA FIELD EXPLORER</label>
+    <h2>Explora el <em>territorio.</em></h2>
+    <p class="section-lead">Consulta lugares de interés geológico y paleontológico. La ubicación del dispositivo es opcional: puedes explorar sin compartirla o activarla expresamente cuando quieras.</p>
+    <div class="field-panel">
+      <div class="field-copy"><h3>Posición y coordenadas UTM</h3><p>Si decides compartir tu posición, el navegador solicitará permiso. OQTHERA convertirá las coordenadas geográficas a UTM WGS84 e indicará la zona, el hemisferio, Este y Norte.</p><p class="small-note">La posición se procesa en esta página y no se guarda ni se envía a un servidor. UTM sirve para localizar puntos; no indica por sí solo que un lugar sea accesible o que esté permitido recoger muestras.</p></div>
+      <div class="field-actions"><button class="btn" id="locate-me" type="button">USAR MI POSICIÓN AHORA</button><p id="location-status" class="commons-status" aria-live="polite">Ubicación desactivada. No se solicitará permiso hasta que pulses el botón.</p><div id="utm-output" class="utm-output" hidden></div></div>
+    </div>
+    <div class="field-note"><b>Exploración responsable</b><p>Las rutas se incorporarán con fuentes verificables, coordenadas revisadas, accesibilidad y situación legal. No publicaremos puntos sensibles de yacimientos vulnerables ni indicaciones para extraer fósiles.</p></div>
+  </section>
+
+  <section id="botanica" class="section botanical-section">
+    <label class="eyebrow">07 — OQTHERA BOTANICAL ARCHIVE</label>
+    <h2>El mundo <em>vegetal.</em></h2>
+    <p class="section-lead">Una sección de botánica con la misma estructura documental que mineralogía: taxonomía, morfología, distribución, hábitat, ecología, fotografías y referencias.</p>
+    <div class="botanical-grid">
+      <article><span>01 / TAXONOMÍA</span><h3>Clasificación científica</h3><p>Reino, división, clase, orden, familia, género y especie, con nombres científicos y sinónimos documentados.</p></article>
+      <article><span>02 / MORFOLOGÍA</span><h3>Estructura de la planta</h3><p>Hojas, tallos, raíces, flores, frutos, semillas y rasgos diagnósticos observables.</p></article>
+      <article><span>03 / ECOLOGÍA</span><h3>Hábitat y distribución</h3><p>Ambientes, distribución conocida, adaptaciones y relaciones ecológicas.</p></article>
+      <article><span>04 / IDENTIFICACIÓN</span><h3>Clave de observación</h3><p>Comparación guiada de características. Los resultados serán orientativos y mostrarán cuándo faltan datos.</p></article>
+    </div>
+    <p class="small-note">La sección queda preparada como estructura; sus fichas y claves se añadirán cuando cada dato tenga referencias y revisión.</p>
+  </section>
+
+  <section id="emergencias" class="section emergency-section">
+    <label class="eyebrow">08 — SEGURIDAD EN EL CAMPO</label>
+    <h2>Información de <em>emergencias.</em></h2>
+    <p class="section-lead">Guías breves para saber cómo actuar ante imprevistos durante una salida. No sustituyen a los servicios de emergencia ni a la formación oficial.</p>
+    <div class="emergency-call"><div><b>Emergencia inmediata en España</b><p>Aléjate del peligro si puedes hacerlo sin exponerte y llama al 112. Indica qué ocurre, dónde estás y si hay personas en peligro.</p></div><a class="btn" href="tel:112">LLAMAR AL 112</a></div>
+    <div class="emergency-grid">
+      <article><h3>Si te pierdes</h3><p>Detente en un lugar seguro, evita seguir caminos desconocidos, intenta localizar tu posición y contacta con el 112 si no puedes regresar o existe riesgo. Conserva batería y comparte referencias visibles.</p></article>
+      <article><h3>Ante una tormenta</h3><p>Abandona crestas, cumbres, zonas expuestas y cauces. Busca refugio seguro en un edificio o vehículo cerrado. No te refugies bajo árboles aislados ni junto a estructuras metálicas.</p></article>
+      <article><h3>Ante un incendio forestal</h3><p>Llama al 112, aléjate del humo y sigue las indicaciones oficiales. No atravieses humo ni intentes acercarte al frente del incendio para observarlo o fotografiarlo.</p></article>
+      <article><h3>Si alguien se lesiona</h3><p>Asegura primero la zona. Llama al 112 si la lesión es grave, hay pérdida de conocimiento o no sabes cómo actuar. Sigue las instrucciones del operador y no muevas a la persona si sospechas una lesión importante, salvo peligro inmediato.</p></article>
+      <article><h3>Ante una crecida o riada</h3><p>Aléjate de barrancos, ramblas y cauces. No cruces agua en movimiento ni a pie ni en vehículo. Busca terreno elevado y sigue los avisos oficiales.</p></article>
+      <article><h3>Si encuentras un fósil</h3><p>No lo extraigas ni alteres el afloramiento. Fotografía el contexto desde una distancia segura, anota la ubicación de forma responsable y consulta a la autoridad patrimonial competente.</p></article>
+    </div>
+    <p class="small-note">Contenido inicial para España. Antes de publicar la sección como guía definitiva, revisaremos cada protocolo con fuentes oficiales de protección civil, emergencias y autoridades autonómicas.</p>
   </section>
 
   <section id="proyecto" class="project-section">
