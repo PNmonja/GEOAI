@@ -1,11 +1,14 @@
 import os
 import time
+import logging
 from collections import defaultdict, deque
 from typing import Any
 
 import httpx
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+
+logger = logging.getLogger("oqthera.gateway")
 
 MINDAT_API_BASE = "https://api.mindat.org"
 MINDAT_TOKEN = os.getenv("MINDAT_API_TOKEN", "").strip()
@@ -89,7 +92,16 @@ async def mindat_get(path: str, params: dict[str, Any]) -> Any:
     if response.status_code == 429:
         raise HTTPException(status_code=503, detail="Mindat rate limit reached.")
     if response.status_code >= 500:
-        raise HTTPException(status_code=502, detail="Mindat is temporarily unavailable.")
+        # Log only status and fixed endpoint; never log headers or tokens.
+        logger.warning(
+            "Mindat upstream server error: status=%s endpoint=%s",
+            response.status_code,
+            path
+        )
+        raise HTTPException(
+            status_code=502,
+            detail=f"Mindat upstream server error (HTTP {response.status_code})."
+        )
     if response.status_code >= 400:
         raise HTTPException(status_code=400, detail="Mindat rejected this query.")
 
