@@ -40,10 +40,10 @@ renderSamples();
 
 // Guía de propiedades: no usa fotografías ni afirma reconocer imágenes.
 const questions=[
- {title:"¿Qué tipo de brillo observas?",help:"Observa la superficie con luz normal. El brillo por sí solo no identifica un mineral.",key:"luster",options:[["Metálico","metal"],["Vítreo","vitreous"],["Nacarado o sedoso","pearly"],["No puedo determinarlo","unknown"]]},
- {title:"¿Qué dureza aproximada conoces?",help:"Registra solo una prueba ya realizada de forma segura. No rayes piezas valiosas ni uses herramientas.",key:"hardness",options:[["Muy baja: se raya con la uña","very_low"],["Intermedia: alrededor de 3","around_three"],["Alta: puede rayar vidrio","high"],["No lo sé","unknown"]]},
- {title:"¿Conoces el color de la raya?",help:"La raya es el color del polvo del mineral, no el color externo. No realices pruebas sobre piezas valiosas.",key:"streak",options:[["Blanca o clara","light"],["Oscura o coloreada","dark"],["No se ha comprobado","unknown"]]},
- {title:"¿Qué exfoliación o rotura has observado?",help:"Elige solo una forma que hayas observado claramente. Si no puedes distinguirla, marca que no lo sabes.",key:"cleavage",options:[["Láminas finas y flexibles","sheets"],["Planos que forman romboedros","rhombohedral"],["Planos a 90° que forman cubos","cubic"],["Una dirección de exfoliación marcada","one_direction"],["Fractura curva o concoidea","conchoidal"],["No lo sé","unknown"]]}
+ {title:"¿Qué tipo de brillo observas?",help:"Observa la superficie con luz normal. El brillo es una pista, no una identificación por sí solo.",key:"luster",options:[["Metálico","metal"],["Vítreo","vitreous"],["Nacarado o sedoso","pearly"],["Mate o terroso","dull"],["No puedo determinarlo","unknown"]]},
+ {title:"¿Qué ocurre al intentar marcar la muestra?",help:"No dañes piezas valiosas ni hagas pruebas sobre muestras prestadas. La comparación solo es útil si el material que frota la muestra tiene dureza conocida. No uses otra roca cualquiera como patrón.",key:"scratch",options:[["La uña deja una marca","nail_marks"],["La uña no la marca; una muestra de referencia conocida sí","known_reference_marks"],["No se marca con la uña ni con esa referencia","neither_marks"],["No lo he comprobado / no lo sé","unknown"]]},
+ {title:"¿Cuánta luz atraviesa la muestra?",help:"Obsérvala con luz detrás, si es posible. En agregados gruesos la transparencia puede diferir de la de un cristal fino.",key:"transparency",options:[["Se ve claramente a través","transparent"],["Deja pasar luz, pero no permite ver con claridad","translucent"],["No deja pasar luz","opaque"],["No puedo determinarlo","unknown"]]},
+ {title:"¿Qué exfoliación o tipo de rotura observas?",help:"La exfoliación genera superficies planas repetidas; la fractura es una rotura sin esos planos. No golpees la muestra para comprobarlo.",key:"cleavage",options:[["Láminas finas","sheets"],["Planos romboédricos","rhombohedral"],["Planos cúbicos, cercanos a 90°","cubic"],["Una dirección de exfoliación marcada","one_direction"],["Fractura curva o concoidea","conchoidal"],["No lo sé","unknown"]]}
 ];
 let stepIndex=0;
 let answers={};
@@ -65,16 +65,16 @@ function renderQuestion(){
  }));
 }
 function scoreMineral(m){
- let score=0, known=0, incompatible=false;
- const h=answers.hardness,l=answers.luster,s=answers.streak,c=answers.cleavage;
- if(l!=="unknown"){known++;if(l==="metal")incompatible=true;if(l==="pearly"&&(m.name==="Moscovita"||m.name==="Biotita"||m.name==="Yeso"))score+=1;}
- if(h!=="unknown"){
+ let score=0, known=0;
+ const l=answers.luster,t=answers.transparency,s=answers.scratch,c=answers.cleavage;
+ if(l!=="unknown"){known++;if(l==="pearly"&&(m.name==="Moscovita"||m.name==="Biotita"||m.name==="Yeso"))score+=1;}
+ if(t!=="unknown"){known++; /* La transparencia depende también del grosor y del estado de la muestra; no se usa para descartar. */}
+ if(s!=="unknown"){
    known++;
-   if(h==="high"&&m.name!=="Cuarzo")incompatible=true;
-   if(h==="very_low"&&m.name==="Yeso")score+=2;
-   if(h==="around_three"&&m.name==="Calcita")score+=1;
+   // La prueba con la uña solo orienta hacia materiales relativamente blandos.
+   // Una roca cualquiera no es un patrón de dureza; no se asignan puntos por esa opción.
+   if(s==="nail_marks"&&(m.name==="Yeso"||m.name==="Halita"))score+=1;
  }
- if(s!=="unknown"){known++;if(s==="dark")incompatible=true;}
  if(c!=="unknown"){
    known++;
    if(c==="sheets"&&(m.name==="Moscovita"||m.name==="Biotita"))score+=3;
@@ -83,20 +83,20 @@ function scoreMineral(m){
    if(c==="one_direction"&&m.name==="Yeso")score+=2;
    if(c==="conchoidal"&&m.name==="Cuarzo")score+=2;
  }
- return {score,known,incompatible};
+ return {score,known};
 }
 function showResult(){
  const anyKnown=Object.values(answers).some(v=>v!=="unknown");
  if(!anyKnown){questionArea.innerHTML=`<div class="result-card"><span class="result-label">SIN INFORMACIÓN SUFICIENTE</span><h3>No es posible orientar la identificación.</h3><p>Necesitamos al menos una propiedad observable. Puedes reiniciar la guía cuando tengas más información.</p><button class="btn" id="try-again">VOLVER A EMPEZAR</button></div>`;document.querySelector("#try-again").addEventListener("click",restart);return}
- const ranked=minerals.filter(m=>m.type==="Mineral").map(m=>({m,...scoreMineral(m)})).filter(x=>x.known>0&&!x.incompatible).sort((a,b)=>b.score-a.score);
+ const ranked=minerals.filter(m=>m.type==="Mineral").map(m=>({m,...scoreMineral(m)})).filter(x=>x.known>0).sort((a,b)=>b.score-a.score);
  const uncertain=Object.values(answers).filter(v=>v==="unknown").length;
  const bestScore=ranked.length?ranked[0].score:0;
  // No mostramos minerales elegidos por el orden del catálogo cuando ninguna propiedad los respalda.
  const top=bestScore>0?ranked.filter(x=>x.score===bestScore):[];
- const hasConflict=answers.luster==="metal"||answers.streak==="dark"||(answers.hardness==="high"&&ranked.length===0);
+ const hasConflict=false;
  const heading=top.length?"Posibilidades compatibles para contrastar":"Información insuficiente para orientar la identificación";
  const candidatesHtml=top.length?`<div class="candidate-list">${top.map(x=>`<article><b>${x.m.name}</b><span>${x.m.formula}</span><p>${x.m.description}</p><small>Posibles confusiones: ${x.m.confusions}</small><a href="${x.m.mindat}" target="_blank" rel="noopener noreferrer">Consultar referencia externa ↗</a></article>`).join("")}</div>`:`<p>${hasConflict?"Una o más propiedades no encajan con las referencias del conjunto inicial de seis minerales.":"No hay una coincidencia respaldada por las propiedades seleccionadas."} No mostraremos minerales al azar. Observa otras características o consulta una persona especialista.</p>`;
- questionArea.innerHTML=`<div class="result-card"><span class="result-label">ORIENTACIÓN PRELIMINAR · NO ES UN DIAGNÓSTICO</span><h3>${heading}</h3><p>La guía compara algunas propiedades declaradas. No calcula probabilidades ni confirma la identidad de una muestra.</p>${candidatesHtml}<p class="result-caution">${uncertain? "Hay propiedades sin determinar; la orientación es especialmente limitada.":"Las propiedades usadas son insuficientes para confirmar un mineral."} Si ninguna opción encaja, no fuerces una identificación.</p><button class="btn" id="try-again">NUEVA OBSERVACIÓN ↺</button></div>`;
+ questionArea.innerHTML=`<div class="result-card"><span class="result-label">ORIENTACIÓN PRELIMINAR · NO ES UN DIAGNÓSTICO</span><h3>${heading}</h3><p>La guía compara algunas propiedades declaradas. La dureza se trata solo como una observación orientativa; no calcula probabilidades ni confirma la identidad de una muestra.</p>${candidatesHtml}<p class="result-caution">${uncertain? "Hay propiedades sin determinar; la orientación es especialmente limitada.":"Las propiedades usadas son insuficientes para confirmar un mineral."} Si ninguna opción encaja, no fuerces una identificación.</p><button class="btn" id="try-again">NUEVA OBSERVACIÓN ↺</button></div>`;
  document.querySelector("#try-again").addEventListener("click",restart);
 }
 function restart(){stepIndex=0;answers={};renderQuestion()}
