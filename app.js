@@ -43,7 +43,8 @@ const questions=[
  {title:"¿Qué tipo de brillo observas?",help:"Observa la superficie con luz normal. El brillo es una pista, no una identificación por sí solo.",key:"luster",options:[["Metálico","metal"],["Vítreo","vitreous"],["Nacarado o sedoso","pearly"],["Mate o terroso","dull"],["No puedo determinarlo","unknown"]]},
  {title:"¿Qué ocurre al intentar marcar la muestra?",help:"No dañes piezas valiosas ni hagas pruebas sobre muestras prestadas. La comparación solo es útil si el material que frota la muestra tiene dureza conocida. No uses otra roca cualquiera como patrón.",key:"scratch",options:[["La uña deja una marca","nail_marks"],["La uña no la marca; una muestra de referencia conocida sí","known_reference_marks"],["No se marca con la uña ni con esa referencia","neither_marks"],["No lo he comprobado / no lo sé","unknown"]]},
  {title:"¿Cuánta luz atraviesa la muestra?",help:"Obsérvala con luz detrás, si es posible. En agregados gruesos la transparencia puede diferir de la de un cristal fino.",key:"transparency",options:[["Se ve claramente a través","transparent"],["Deja pasar luz, pero no permite ver con claridad","translucent"],["No deja pasar luz","opaque"],["No puedo determinarlo","unknown"]]},
- {title:"¿Qué exfoliación o tipo de rotura observas?",help:"La exfoliación genera superficies planas repetidas; la fractura es una rotura sin esos planos. No golpees la muestra para comprobarlo.",key:"cleavage",options:[["Láminas finas","sheets"],["Planos romboédricos","rhombohedral"],["Planos cúbicos, cercanos a 90°","cubic"],["Una dirección de exfoliación marcada","one_direction"],["Fractura curva o concoidea","conchoidal"],["No lo sé","unknown"]]}
+ {title:"¿Qué exfoliación o tipo de rotura observas?",help:"La exfoliación genera superficies planas repetidas; la fractura es una rotura sin esos planos. No golpees la muestra para comprobarlo.",key:"cleavage",options:[["Láminas finas","sheets"],["Planos romboédricos","rhombohedral"],["Planos cúbicos, cercanos a 90°","cubic"],["Una dirección de exfoliación marcada","one_direction"],["Fractura curva o concoidea","conchoidal"],["No lo sé","unknown"]]},
+ {title:"¿Conoces el color de la raya? (Opcional)",help:"La raya es el color del polvo que deja el mineral sobre una placa adecuada. No hace falta realizar esta prueba: puedes omitirla.",key:"streak",options:[["Blanca o clara","light"],["Oscura o de otro color","dark"],["Omitir / no se ha comprobado","unknown"]]}
 ];
 let stepIndex=0;
 let answers={};
@@ -55,8 +56,8 @@ const back=document.querySelector("#back");
 function renderQuestion(){
  if(!questionArea)return;
  const q=questions[stepIndex];
- stepCount.textContent=`PASO 0${stepIndex+1} / 04`;
- progress.style.width=((stepIndex+1)/4*100)+"%";
+ stepCount.textContent=`PASO 0${stepIndex+1} / 05`;
+ progress.style.width=((stepIndex+1)/5*100)+"%";
  back.disabled=stepIndex===0;
  questionArea.innerHTML=`<h3>${q.title}</h3><p>${q.help}</p><div class="answers">${q.options.map(([label,value])=>`<button class="answer ${answers[q.key]===value?"selected":""}" data-value="${value}">${label}<span>→</span></button>`).join("")}</div>`;
  questionArea.querySelectorAll(".answer").forEach(btn=>btn.addEventListener("click",()=>{
@@ -89,7 +90,7 @@ function showResult(){
  const anyKnown=Object.values(answers).some(v=>v!=="unknown");
  if(!anyKnown){questionArea.innerHTML=`<div class="result-card"><span class="result-label">SIN INFORMACIÓN SUFICIENTE</span><h3>No es posible orientar la identificación.</h3><p>Necesitamos al menos una propiedad observable. Puedes reiniciar la guía cuando tengas más información.</p><button class="btn" id="try-again">VOLVER A EMPEZAR</button></div>`;document.querySelector("#try-again").addEventListener("click",restart);return}
  const ranked=minerals.filter(m=>m.type==="Mineral").map(m=>({m,...scoreMineral(m)})).filter(x=>x.known>0).sort((a,b)=>b.score-a.score);
- const uncertain=Object.values(answers).filter(v=>v==="unknown").length;
+ const uncertain=Object.entries(answers).filter(([key,value])=>key!=="streak"&&value==="unknown").length;
  const bestScore=ranked.length?ranked[0].score:0;
  // No mostramos minerales elegidos por el orden del catálogo cuando ninguna propiedad los respalda.
  const top=bestScore>0?ranked.filter(x=>x.score===bestScore):[];
