@@ -120,3 +120,76 @@ menu?.addEventListener("click",()=>{
  menu.setAttribute("aria-expanded",String(open));
 });
 nav?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("nav-open");menu?.setAttribute("aria-expanded","false")}));
+
+
+// FIELD EXPLORER — geolocation is requested only after explicit user action.
+// Coordinates are converted locally to WGS84 / UTM; no location is transmitted.
+function toUtm(lat, lon) {
+  const a = 6378137;
+  const eccSquared = 0.00669437999014;
+  const k0 = 0.9996;
+  const zone = Math.min(60, Math.max(1, Math.floor((lon + 180) / 6) + 1));
+  const lonOrigin = (zone - 1) * 6 - 180 + 3;
+  const eccPrimeSquared = eccSquared / (1 - eccSquared);
+  const latRad = lat * Math.PI / 180;
+  const lonRad = lon * Math.PI / 180;
+  const lonOriginRad = lonOrigin * Math.PI / 180;
+  const N = a / Math.sqrt(1 - eccSquared * Math.sin(latRad) ** 2);
+  const T = Math.tan(latRad) ** 2;
+  const C = eccPrimeSquared * Math.cos(latRad) ** 2;
+  const A = Math.cos(latRad) * (lonRad - lonOriginRad);
+  const M = a * (
+    (1 - eccSquared / 4 - 3 * eccSquared ** 2 / 64 - 5 * eccSquared ** 3 / 256) * latRad
+    - (3 * eccSquared / 8 + 3 * eccSquared ** 2 / 32 + 45 * eccSquared ** 3 / 1024) * Math.sin(2 * latRad)
+    + (15 * eccSquared ** 2 / 256 + 45 * eccSquared ** 3 / 1024) * Math.sin(4 * latRad)
+    - (35 * eccSquared ** 3 / 3072) * Math.sin(6 * latRad)
+  );
+  let easting = k0 * N * (
+    A + (1 - T + C) * A ** 3 / 6
+    + (5 - 18 * T + T ** 2 + 72 * C - 58 * eccPrimeSquared) * A ** 5 / 120
+  ) + 500000;
+  let northing = k0 * (
+    M + N * Math.tan(latRad) * (
+      A ** 2 / 2 + (5 - T + 9 * C + 4 * C ** 2) * A ** 4 / 24
+      + (61 - 58 * T + T ** 2 + 600 * C - 330 * eccPrimeSquared) * A ** 6 / 720
+    )
+  );
+  if (lat < 0) northing += 10000000;
+  const bands = "CDEFGHJKLMNPQRSTUVWXX";
+  const latitudeBand = lat >= -80 && lat <= 84 ? bands[Math.min(20, Math.floor((lat + 80) / 8))] : "—";
+  return { zone, latitudeBand, hemisphere: lat >= 0 ? "N" : "S", easting, northing };
+}
+const locateButton = document.querySelector("#locate-me");
+const locationStatus = document.querySelector("#location-status");
+const utmOutput = document.querySelector("#utm-output");
+locateButton?.addEventListener("click", () => {
+  if (!navigator.geolocation) {
+    locationStatus.textContent = "Este navegador no permite solicitar la ubicación.";
+    return;
+  }
+  locateButton.disabled = true;
+  locationStatus.textContent = "Esperando el permiso y la posición del dispositivo…";
+  navigator.geolocation.getCurrentPosition(position => {
+    const { latitude, longitude, accuracy } = position.coords;
+    const utm = toUtm(latitude, longitude);
+    locationStatus.textContent = "Posición obtenida. Se ha convertido localmente; no se ha enviado al servidor.";
+    utmOutput.hidden = false;
+    utmOutput.innerHTML = `
+      <b>UTM · WGS84</b>
+      <span>Zona: ${utm.zone}${utm.latitudeBand} · Hemisferio: ${utm.hemisphere}</span>
+      <span>Este (E): ${Math.round(utm.easting)} m</span>
+      <span>Norte (N): ${Math.round(utm.northing)} m</span>
+      <span>Precisión indicada por el dispositivo: ±${Math.round(accuracy)} m</span>
+      <small>La precisión real puede variar. Comprueba el datum y la zona antes de utilizar estas coordenadas en cartografía técnica.</small>
+    `;
+    locateButton.disabled = false;
+  }, error => {
+    const messages = {
+      1: "No se concedió permiso. Puedes seguir usando OQTHERA sin ubicación.",
+      2: "El dispositivo no pudo determinar la posición.",
+      3: "La solicitud de ubicación agotó el tiempo de espera."
+    };
+    locationStatus.textContent = messages[error.code] || "No se pudo obtener la ubicación.";
+    locateButton.disabled = false;
+  }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 });
+});
