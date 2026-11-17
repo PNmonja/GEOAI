@@ -2,3 +2,27 @@
 .brand-logo{width:42px;height:42px;object-fit:contain;display:block}.brand-mark{display:none}
 
 .commons-section{border-top:1px solid var(--line)}.commons-controls{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(220px,1.4fr) auto;gap:12px;align-items:end;margin:28px 0 16px}.commons-controls label{display:grid;gap:7px;color:var(--gold2);font-size:10px;letter-spacing:1px}.commons-controls input,.commons-controls select{width:100%;min-width:0;padding:12px;background:#211d17;border:1px solid var(--line);color:var(--ink)}.commons-status{color:var(--muted);font-size:12px;margin:16px 0}.commons-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.commons-card{background:#211d17;border:1px solid var(--line);min-width:0;overflow:hidden}.commons-thumb{display:block;width:100%;height:190px;object-fit:contain;background:#100f0d}.commons-card-body{padding:15px;display:grid;gap:8px}.commons-card-body>b{font:600 15px Cinzel;overflow-wrap:anywhere}.commons-card-body p{margin:0;color:var(--muted);font-size:11px;overflow-wrap:anywhere}.commons-card-body a{color:var(--gold2);font-size:10px}.commons-card-body .btn{justify-self:start}.commons-warning{border-left:2px solid var(--rust);padding-left:9px}.commons-export{margin-top:24px;padding:18px;border:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:18px;background:#211d17}.commons-export p{font-size:11px;color:var(--muted);margin:4px 0 0}.commons-export button:disabled{opacity:.4;cursor:not-allowed}@media(max-width:800px){.commons-controls{grid-template-columns:1fr}.commons-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.commons-grid{grid-template-columns:1fr}.commons-export{align-items:flex-start;flex-direction:column}}
+
+
+/* OQTHERA FIELD EXPLORER, BOTANY AND EMERGENCY MODULES */
+.field-section,.botanical-section,.emergency-section{border-top:1px solid var(--line)}
+.field-panel{display:grid;grid-template-columns:1fr 1fr;gap:25px;padding:24px;background:#211d17;border:1px solid var(--line);margin-top:28px}
+.field-copy h3,.emergency-grid h3,.botanical-grid h3{font:600 21px Cinzel;color:var(--gold2);margin:0 0 10px}
+.field-copy p,.field-note p,.botanical-grid p,.emergency-grid p{font-size:12px;color:var(--muted)}
+.field-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.field-actions .btn{margin-top:4px}
+.utm-output{width:100%;padding:15px;border:1px solid var(--gold);background:#17140f;display:grid;gap:7px;font-size:12px}
+.utm-output b{color:var(--gold2);letter-spacing:1px}
+.utm-output span{color:var(--ink);font-variant-numeric:tabular-nums}
+.utm-output small{color:var(--muted);font-size:10px;margin-top:6px}
+.field-note{margin-top:16px;padding:16px;border-left:2px solid var(--gold);background:#211d17;font-size:12px}
+.field-note b{color:var(--gold2)}
+.botanical-grid,.emergency-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:28px}
+.botanical-grid article,.emergency-grid article{padding:20px;border:1px solid var(--line);background:#211d17}
+.botanical-grid article>span{font-size:9px;letter-spacing:2px;color:var(--gold2)}
+.botanical-grid h3{margin-top:10px}
+.emergency-call{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px;border:1px solid #a66a43;background:#2a2119;margin-top:25px}
+.emergency-call b{font:600 19px Cinzel;color:var(--gold2)}
+.emergency-call p{font-size:12px;color:var(--muted);max-width:700px}
+.emergency-grid h3{font-size:18px}
+@media(max-width:700px){.field-panel{grid-template-columns:1fr}.botanical-grid,.emergency-grid{grid-template-columns:1fr}.emergency-call{align-items:flex-start;flex-direction:column}}
