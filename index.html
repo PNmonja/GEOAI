@@ -48,7 +48,7 @@
     <h2>Tres caminos para <em>explorar.</em></h2>
     <div class="entry-grid">
       <a class="entry-card entry-feature" href="#identificar"><span class="entry-icon">⌕</span><small>01 / HERRAMIENTA</small><h3>Identificar una muestra</h3><p>Registra propiedades observables y obtén posibilidades que podrás contrastar.</p><strong>EMPEZAR IDENTIFICACIÓN ↗</strong></a>
-      <a class="entry-card" href="#coleccion"><span class="entry-icon">◇</span><small>02 / CATÁLOGO</small><h3>Explorar la colección</h3><p>Consulta fichas introductorias de minerales y grandes grupos de rocas.</p><strong>VER COLECCIÓN ↗</strong></a>
+      <a class="entry-card" href="#coleccion"><span class="entry-icon">◇</span><small>02 / CATÁLOGO</small><h3>Explorar la colección</h3><p>Consulta el catálogo de datos propio de OQTHERA, con fichas versionadas y estados de revisión transparentes.</p><strong>VER COLECCIÓN ↗</strong></a>
       <a class="entry-card" href="#proyecto"><span class="entry-icon">⌑</span><small>03 / INFORMACIÓN</small><h3>Conocer OQTHERA</h3><p>Descubre cómo funciona el proyecto, sus criterios, fuentes y límites.</p><strong>CONOCER EL PROYECTO ↗</strong></a>
     </div>
   </section>
@@ -94,7 +94,7 @@
       <div class="project-points">
         <article><b>01 / ALCANCE</b><p>La primera etapa se centra en minerales frecuentes y grandes grupos de rocas. La identificación detallada de fósiles y la prospección minera quedan fuera de esta versión.</p></article>
         <article><b>02 / TRANSPARENCIA</b><p>Los resultados son orientativos. Se mostrarán alternativas, datos pendientes y casos sin información suficiente en lugar de presentar una certeza aparente.</p></article>
-        <article><b>03 / FUENTES</b><p>Las fichas deben indicar referencias consultables, autoría de las imágenes, licencia y fecha de revisión cuando esos datos estén disponibles.</p></article>
+        <article><b>03 / FUENTES</b><p>OQTHERA mantiene su propio catálogo JSON. Cada ficha debe incorporar referencias consultables, autoría de imágenes, licencia y fecha de revisión antes de marcarse como verificada.</p></article>
       </div>
     </div>
   </section>
@@ -102,7 +102,7 @@
   <section class="section sources-section">
     <label class="eyebrow">04 — CONSULTA EXTERNA</label>
     <h2>Contrasta con <em>fuentes.</em></h2>
-    <p class="section-lead">OQTHERA no copia automáticamente fichas ni fotografías de bases externas. El USGS aporta criterios generales; el Handbook of Mineralogy y Mindat permiten contrastar datos de especies concretas; Geology.com ofrece guías didácticas complementarias.</p>
+    <p class="section-lead">OQTHERA mantiene su propio catálogo y no depende de APIs externas para funcionar. Las fuentes especializadas se utilizan como referencias de consulta para documentar y revisar los datos, no como servicios de los que dependa la aplicación.</p>
     <div class="source-links">
       <a href="https://www.usgs.gov/special-topics/laboratories/science/science-topics/mineral-identification" target="_blank" rel="noopener noreferrer"><b>USGS · Mineral Identification</b><span>Propiedades físicas y orientación para identificar minerales ↗</span></a>
       <a href="https://handbookofmineralogy.org/" target="_blank" rel="noopener noreferrer"><b>Handbook of Mineralogy</b><span>Fichas técnicas, propiedades físicas y ópticas por especie ↗</span></a>
@@ -110,7 +110,7 @@
       <a href="https://geology.com/minerals/" target="_blank" rel="noopener noreferrer"><b>Geology.com · Minerals</b><span>Guías de propiedades y pruebas de identificación ↗</span></a>
       <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener noreferrer"><b>Wikimedia Commons</b><span>Imágenes; comprobar autoría y licencia de cada archivo ↗</span></a>
     </div>
-    <p class="small-note">La integración directa con la API de Mindat queda pendiente de confirmar permisos, condiciones de uso y una conexión segura desde un servidor. No se guardan claves privadas en esta web pública.</p>
+    <p class="small-note">El catálogo de OQTHERA se sirve desde data/minerals.json. Las fichas iniciales están pendientes de auditoría científica; no se presentan como verificadas.</p>
   </section>
 </main>
 
