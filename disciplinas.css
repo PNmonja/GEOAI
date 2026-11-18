@@ -57,3 +57,22 @@ body.discipline-page{background:radial-gradient(ellipse at 82% 8%,rgba(var(--dis
 .discipline-page.routes .module-card:nth-child(4){--card-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=88')}
 @media(max-width:700px){.discipline-page .module-hero{min-height:360px;padding:54px 18px 38px}.discipline-page .module-hero:before{inset:12px 10px 4px}.discipline-page .module-grid{grid-template-columns:1fr;padding:12px 14px 42px;gap:15px}.discipline-page .module-card{min-height:290px;padding:23px}.discipline-page .module-card p{font-size:14px}.discipline-page .module-links{padding:0 18px 42px}.discipline-page .top{padding-inline:14px}.discipline-page .brand-logo{width:34px;height:34px}}
 @media(max-width:380px){.discipline-page .brand{font-size:16px}.discipline-page .brand small{font-size:7px}.discipline-page .module-card{min-height:270px}}
+
+/* OQTHERA: atmospheric discipline backgrounds and complete module photography */
+body.discipline-page{position:relative;background-color:var(--discipline-bg)}
+body.discipline-page:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:.13}
+body.discipline-page.botany:before{background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=88')}
+body.discipline-page.paleontology:before{background-image:url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=2000&q=88')}
+body.discipline-page.mineralogy:before{background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=88')}
+body.discipline-page.routes:before{background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=88')}
+.discipline-page.botany .module-hero:before{background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=90')}
+.discipline-page.botany .module-card:nth-child(1){--card-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.botany .module-card:nth-child(2){--card-image:url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.botany .module-card:nth-child(3){--card-image:url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.botany .module-card:nth-child(4){--card-image:url('https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.paleontology .module-card:nth-child(3){--card-image:url('https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.paleontology .module-card:nth-child(4){--card-image:url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.routes .module-card:nth-child(5){--card-image:url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.routes .module-card:nth-child(6){--card-image:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page .module-card{min-height:350px}
+@media(max-width:700px){.discipline-page .module-card{min-height:280px}.discipline-page:before{opacity:.09}}
