@@ -162,3 +162,19 @@ footer .brand{display:flex;align-items:center;gap:10px}
 .entry-card h3{font-size:clamp(22px,2.3vw,29px);text-shadow:0 2px 12px #000}.entry-card p{color:#e0e5e8;font-size:14px;line-height:1.8;text-shadow:0 1px 8px #000}.entry-card small,.entry-card strong{color:#f0d49b;text-shadow:0 1px 8px #000}
 @media(max-width:760px){.entry-grid{grid-template-columns:1fr;gap:14px}.entry-card{min-height:270px;padding:24px}.top{height:auto;min-height:70px;padding:12px 16px;gap:12px;flex-wrap:wrap}.top nav{display:none;order:4;width:100%;max-width:none;flex-direction:column;gap:0;padding:8px 0;background:#15130ff7}.top nav.nav-open{display:flex}.top nav a{padding:12px 6px;border-top:1px solid #ffffff14}.top #menu{display:block}.toplink{display:none}.hero{grid-template-columns:1fr;padding:36px 0;gap:24px}.hero-art{min-height:250px}.section{padding:56px 0}.principles{grid-template-columns:1fr 1fr;gap:14px}.identify-section{grid-template-columns:1fr;gap:22px}.lab-panel{min-width:0}.sample-grid{grid-template-columns:1fr}.commons-grid{grid-template-columns:1fr}.botanical-grid{grid-template-columns:1fr}.emergency-grid{grid-template-columns:1fr}.source-links{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}}
 @media(max-width:420px){.entry-card{min-height:245px}.hero h1{font-size:clamp(34px,10vw,48px)}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{width:100%;text-align:center}.catalog-tools{grid-template-columns:1fr}.principles{grid-template-columns:1fr}.emergency-call{flex-direction:column;align-items:flex-start}}
+
+/* OQTHERA 2027 visual system: image-led discipline cards */
+.entry-card{position:relative;isolation:isolate;overflow:hidden;min-height:330px;padding:26px;background-color:#17140f;background-image:linear-gradient(180deg,rgba(8,10,12,.05) 0%,rgba(8,10,12,.48) 38%,rgba(8,10,12,.96) 100%),var(--entry-image);background-size:cover;background-position:center;border-color:#ffffff24;box-shadow:0 16px 38px #0005}
+.entry-card:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,#c5a56b18,transparent 55%)}
+.entry-card p{color:#eee5d7;text-shadow:0 1px 8px #000;max-width:420px}
+.entry-card h3{ text-shadow:0 2px 14px #000}
+.entry-card strong,.entry-card small,.entry-icon{ text-shadow:0 2px 12px #000}
+.entry-card:hover{transform:translateY(-6px);border-color:var(--gold2);background-image:linear-gradient(180deg,rgba(8,10,12,.02),rgba(8,10,12,.94)),var(--entry-image)}
+.entry-card:nth-child(1){--entry-image:url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=1200&q=88')}
+.entry-card:nth-child(2){--entry-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=88')}
+.entry-card:nth-child(3){--entry-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=88')}
+.entry-card:nth-child(4){--entry-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=88')}
+.entry-card:nth-child(5){--entry-image:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=88')}
+.entry-card:nth-child(6){--entry-image:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=88')}
+@media(max-width:700px){.entry-grid{grid-template-columns:1fr}.entry-card{min-height:270px;padding:22px}}
+@media(min-width:701px) and (max-width:980px){.entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
