@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 GATEWAY_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(GATEWAY_DIR))
 
-from main import app  # noqa: E402
+from main import app
 
 
 def test_health_endpoint_is_available():
