@@ -12,3 +12,21 @@
 a:focus-visible{outline:2px solid var(--cyan2);outline-offset:4px}
 @media(max-width:800px){.top{height:auto;min-height:76px;padding:14px 0;align-items:flex-start}.nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 14px;max-width:55%;font-size:11px}.top-cta{display:none}}
 @media(max-width:520px){.top{align-items:center}.nav{max-width:58%;gap:5px 10px;font-size:10px}.brand{font-size:18px}.brand small{font-size:7px}.hero-image{min-height:245px}}
+
+
+/* OQTHERA Botánica — immersive image modules and compact mobile navigation */
+.botany .hero-image{min-height:470px;border-radius:12px;background-image:linear-gradient(180deg,#07130b0a,#07130be0),url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=92');background-position:center;background-size:cover}
+.botany .hero-image:after{content:"OQTHERA / BOTANICAL FIELD ARCHIVE";letter-spacing:2.4px}
+.botany .modules{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.botany .module{min-height:350px;padding:30px;border-radius:12px;justify-content:flex-end;background-color:#0b1a12;background-image:linear-gradient(180deg,#06100b08 0%,#06100b55 42%,#06100bf2 100%),var(--botany-image);background-size:cover;background-position:center;box-shadow:0 18px 42px #0006}
+.botany .module:before{inset:0;width:auto;height:auto;border:0;border-radius:0;right:0;top:0;box-shadow:none;background:linear-gradient(135deg,#7acb8b20,transparent 60%)}
+.botany .module:nth-child(1){--botany-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=90')}
+.botany .module:nth-child(2){--botany-image:url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1200&q=90')}
+.botany .module:nth-child(3){--botany-image:url('https://images.unsplash.com/photo-1483794344563-d27a8d18014e?auto=format&fit=crop&w=1200&q=90')}
+.botany .module:nth-child(4){--botany-image:url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1200&q=90')}
+.botany .module:nth-child(5){--botany-image:url('https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=90')}
+.botany .module:nth-child(6){--botany-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=90')}
+.botany .module h3{font-size:clamp(23px,2.3vw,30px);text-shadow:0 2px 14px #000}.botany .module p{max-width:520px;color:#e0eee3;font-size:14px;line-height:1.8;text-shadow:0 1px 8px #000}.botany .module .num,.botany .module strong{color:#b6f0bd;text-shadow:0 1px 8px #000}.botany .module strong{display:flex;gap:8px;align-items:center}.botany .module strong:after{content:"↗";font-size:16px}
+.botany .banner{border-radius:12px;padding:34px;background:linear-gradient(110deg,#102d1c,#0c1a12);margin-bottom:30px}
+@media(max-width:800px){.botany .wrap{width:min(100% - 28px,1200px)}.botany .top{padding:12px 0;min-height:70px;gap:10px}.botany .nav{display:none;order:3;position:absolute;top:100%;left:0;right:0;max-width:none;flex-direction:column;gap:0;padding:8px 14px;background:#08140df7;border:1px solid #79c98b35;border-radius:0 0 12px 12px;box-shadow:0 16px 30px #0008}.botany .nav.nav-open{display:flex}.botany .nav a{padding:13px 8px;border-bottom:1px solid #ffffff12;font-size:14px}.botany #menu{display:block;background:#10251a;border:1px solid #79c98b70;color:#eaffed;border-radius:8px;padding:9px 12px}.botany .top-cta{display:none}.botany .hero{grid-template-columns:1fr;gap:24px;padding:30px 0 42px;min-height:0}.botany .hero-image{grid-row:1;min-height:300px}.botany .modules{grid-template-columns:1fr}.botany .module{min-height:300px}.botany .section{padding:58px 0}.botany .section-head{gap:12px}.botany .stats{margin-top:24px}}
+@media(max-width:420px){.botany .wrap{width:calc(100% - 24px)}.botany .hero-image{min-height:250px}.botany h1{font-size:clamp(38px,12vw,54px);letter-spacing:-2px}.botany .module{min-height:270px;padding:22px}.botany .stats div{padding:0 8px}.botany .stats b{font-size:18px}.botany .stats span{font-size:8px;letter-spacing:.6px}}
