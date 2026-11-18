@@ -30,3 +30,26 @@ a:focus-visible{outline:2px solid var(--cyan2);outline-offset:4px}
 .botany .banner{border-radius:12px;padding:34px;background:linear-gradient(110deg,#102d1c,#0c1a12);margin-bottom:30px}
 @media(max-width:800px){.botany .wrap{width:min(100% - 28px,1200px)}.botany .top{padding:12px 0;min-height:70px;gap:10px}.botany .nav{display:none;order:3;position:absolute;top:100%;left:0;right:0;max-width:none;flex-direction:column;gap:0;padding:8px 14px;background:#08140df7;border:1px solid #79c98b35;border-radius:0 0 12px 12px;box-shadow:0 16px 30px #0008}.botany .nav.nav-open{display:flex}.botany .nav a{padding:13px 8px;border-bottom:1px solid #ffffff12;font-size:14px}.botany #menu{display:block;background:#10251a;border:1px solid #79c98b70;color:#eaffed;border-radius:8px;padding:9px 12px}.botany .top-cta{display:none}.botany .hero{grid-template-columns:1fr;gap:24px;padding:30px 0 42px;min-height:0}.botany .hero-image{grid-row:1;min-height:300px}.botany .modules{grid-template-columns:1fr}.botany .module{min-height:300px}.botany .section{padding:58px 0}.botany .section-head{gap:12px}.botany .stats{margin-top:24px}}
 @media(max-width:420px){.botany .wrap{width:calc(100% - 24px)}.botany .hero-image{min-height:250px}.botany h1{font-size:clamp(38px,12vw,54px);letter-spacing:-2px}.botany .module{min-height:270px;padding:22px}.botany .stats div{padding:0 8px}.botany .stats b{font-size:18px}.botany .stats span{font-size:8px;letter-spacing:.6px}}
+
+
+/* Botanical detail pages: consistent OQTHERA identity, photography and mobile layout */
+.botany-detail .top{position:sticky;top:0;z-index:30;background:#07120df2;backdrop-filter:blur(14px);min-height:76px;height:auto;padding:12px 0}
+.botany-detail .brand{display:flex;align-items:center;gap:12px;color:var(--cyan)}
+.botany-detail .brand-logo{width:40px;height:40px;object-fit:contain}
+.botany-detail .brand span{display:block}
+.botany-detail .detail-hero{max-width:none;min-height:390px;padding:76px 38px 48px;margin:36px 0 28px;border:1px solid #79c98b38;border-radius:12px;position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(90deg,#06130df2 0%,#06130dcf 55%,#06130d50 100%),url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=90') center/cover}
+.botany-detail .detail-hero:after{content:"OQTHERA / BOTANICAL KNOWLEDGE";position:absolute;right:26px;bottom:20px;color:#d8f5df;font-size:9px;letter-spacing:2px}
+.botany-detail .detail-hero .lead{max-width:680px;color:#e1eee4}
+.botany-detail .detail-grid{gap:18px}
+.botany-detail .content-panel{min-height:230px;padding:30px;border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(180deg,#07120c60,#07120cf2),var(--detail-image,linear-gradient(135deg,#142b1d,#0c1711));background-size:cover;background-position:center;border-color:#79c98b42}
+.botany-detail .content-panel:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,#79c98b16,transparent 55%)}
+.botany-detail .content-panel>*{position:relative;z-index:1}
+.botany-detail .content-panel:nth-child(1){--detail-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1100&q=88')}
+.botany-detail .content-panel:nth-child(2){--detail-image:url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1100&q=88')}
+.botany-detail .content-panel:nth-child(3){--detail-image:url('https://images.unsplash.com/photo-1483794344563-d27a8d18014e?auto=format&fit=crop&w=1100&q=88')}
+.botany-detail .content-panel:nth-child(4){--detail-image:url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1100&q=88')}
+.botany-detail .content-panel h2{color:#f1fff3}
+.botany-detail .content-panel p{color:#e0eee3}
+.botany-detail #menu{display:none}
+@media(max-width:800px){.botany-detail .top{flex-wrap:wrap}.botany-detail .nav{display:none;order:3;position:absolute;top:100%;left:0;right:0;max-width:none;flex-direction:column;gap:0;padding:8px 14px;background:#08140df7;border:1px solid #79c98b35;border-radius:0 0 12px 12px}.botany-detail .nav.nav-open{display:flex}.botany-detail .nav a{padding:12px 8px;border-bottom:1px solid #ffffff14}.botany-detail #menu{display:block;background:#10251a;border:1px solid #79c98b70;color:#eaffed;border-radius:8px;padding:9px 12px}.botany-detail .detail-hero{padding:48px 22px 38px;min-height:330px;margin:20px 0}.botany-detail .detail-grid{grid-template-columns:1fr}.botany-detail .content-panel{min-height:200px;padding:24px}.botany-detail .top-cta{display:none}}
+@media(max-width:420px){.botany-detail .wrap{width:calc(100% - 24px)}.botany-detail .detail-hero h1{font-size:38px;letter-spacing:-1.8px}.botany-detail .brand-logo{width:34px;height:34px}}
