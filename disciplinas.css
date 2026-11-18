@@ -32,7 +32,7 @@ body.discipline-page{background:radial-gradient(ellipse at 82% 8%,rgba(var(--dis
 /* OQTHERA visual archive refresh — photographic cards and mobile-first layout */
 .discipline-page .module-hero{min-height:440px;display:flex;flex-direction:column;justify-content:center;isolation:isolate}
 .discipline-page .module-hero:before{content:"";position:absolute;inset:22px 28px 10px;border-radius:12px;z-index:-2;opacity:.52;background-position:center;background-size:cover;filter:saturate(.82)}
-.discipline-page.paleontology .module-hero:before{background-image:url('https://images.unsplash.com/photo-1525877442103-5べf1b4a3f5a?auto=format&fit=crop&w=1800&q=90')}
+.discipline-page.paleontology .module-hero:before{background-image:url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=1800&q=90')}
 .discipline-page.mineralogy .module-hero:before{background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=90')}
 .discipline-page.routes .module-hero:before{background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=90')}
 .discipline-page .module-hero:after{z-index:-1;right:8%;top:25%;width:28%;height:220px;border-color:rgba(var(--discipline-rgb),.3)}
