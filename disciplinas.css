@@ -27,3 +27,33 @@ body.discipline-page{background:radial-gradient(ellipse at 82% 8%,rgba(var(--dis
 .discipline-page a:focus-visible,.discipline-page button:focus-visible{outline:2px solid var(--discipline);outline-offset:4px}
 @media(max-width:800px){.discipline-page .top{padding:12px 20px;min-height:74px;height:auto;flex-wrap:wrap}.discipline-page nav{display:none;order:3;width:100%;max-width:none;flex-direction:column;gap:0;padding:10px 0}.discipline-page nav.nav-open{display:flex}.discipline-page nav a{padding:10px 4px;border-top:1px solid #ffffff12}.discipline-page #menu{display:block}.discipline-page .toplink{display:none}.discipline-page .module-hero{padding:70px 22px 45px}.discipline-page .module-hero:after{right:5%;width:25%;opacity:.5}.discipline-page .module-grid{padding:15px 22px 55px}}
 @media(max-width:560px){.discipline-page .module-grid{grid-template-columns:1fr}.discipline-page .module-hero h1{letter-spacing:-1.8px}.discipline-page footer{padding:24px 20px;flex-direction:column;align-items:flex-start}}
+
+
+/* OQTHERA visual archive refresh — photographic cards and mobile-first layout */
+.discipline-page .module-hero{min-height:440px;display:flex;flex-direction:column;justify-content:center;isolation:isolate}
+.discipline-page .module-hero:before{content:"";position:absolute;inset:22px 28px 10px;border-radius:12px;z-index:-2;opacity:.52;background-position:center;background-size:cover;filter:saturate(.82)}
+.discipline-page.paleontology .module-hero:before{background-image:url('https://images.unsplash.com/photo-1525877442103-5べf1b4a3f5a?auto=format&fit=crop&w=1800&q=90')}
+.discipline-page.mineralogy .module-hero:before{background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=90')}
+.discipline-page.routes .module-hero:before{background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=90')}
+.discipline-page .module-hero:after{z-index:-1;right:8%;top:25%;width:28%;height:220px;border-color:rgba(var(--discipline-rgb),.3)}
+.discipline-page .module-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;padding-top:28px}
+.discipline-page .module-card{position:relative;isolation:isolate;overflow:hidden;min-height:330px;padding:30px;display:flex;flex-direction:column;justify-content:flex-end;border-radius:12px;background-color:#101b29;background-image:linear-gradient(180deg,rgba(4,9,14,.05) 0%,rgba(4,9,14,.45) 38%,rgba(4,9,14,.96) 100%),var(--card-image,linear-gradient(145deg,rgba(var(--discipline-rgb),.18),#101b29));background-position:center;background-size:cover;box-shadow:0 18px 44px #0005;transition:transform .25s,border-color .25s}
+.discipline-page .module-card:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(var(--discipline-rgb),.14),transparent 55%)}
+.discipline-page .module-card:hover{transform:translateY(-6px);border-color:var(--discipline)}
+.discipline-page .module-card h2{font-size:clamp(23px,2.2vw,30px);text-shadow:0 2px 18px #000}
+.discipline-page .module-card p{max-width:560px;color:#e0e8ed;font-size:14px;line-height:1.75;text-shadow:0 1px 8px #000}
+.discipline-page .module-card small{color:#fff;text-shadow:0 1px 8px #000}
+.discipline-page.paleontology .module-card:nth-child(1){--card-image:url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.paleontology .module-card:nth-child(2){--card-image:url('https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.paleontology .module-card:nth-child(3){--card-image:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.paleontology .module-card:nth-child(4){--card-image:url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.mineralogy .module-card:nth-child(1){--card-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.mineralogy .module-card:nth-child(2){--card-image:url('https://images.unsplash.com/photo-1615485500704-8e990f9900f5?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.mineralogy .module-card:nth-child(3){--card-image:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.mineralogy .module-card:nth-child(4){--card-image:url('https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.routes .module-card:nth-child(1){--card-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.routes .module-card:nth-child(2){--card-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.routes .module-card:nth-child(3){--card-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=88')}
+.discipline-page.routes .module-card:nth-child(4){--card-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=88')}
+@media(max-width:700px){.discipline-page .module-hero{min-height:360px;padding:54px 18px 38px}.discipline-page .module-hero:before{inset:12px 10px 4px}.discipline-page .module-grid{grid-template-columns:1fr;padding:12px 14px 42px;gap:15px}.discipline-page .module-card{min-height:290px;padding:23px}.discipline-page .module-card p{font-size:14px}.discipline-page .module-links{padding:0 18px 42px}.discipline-page .top{padding-inline:14px}.discipline-page .brand-logo{width:34px;height:34px}}
+@media(max-width:380px){.discipline-page .brand{font-size:16px}.discipline-page .brand small{font-size:7px}.discipline-page .module-card{min-height:270px}}
