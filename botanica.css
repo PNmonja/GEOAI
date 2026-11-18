@@ -53,3 +53,13 @@ a:focus-visible{outline:2px solid var(--cyan2);outline-offset:4px}
 .botany-detail #menu{display:none}
 @media(max-width:800px){.botany-detail .top{flex-wrap:wrap}.botany-detail .nav{display:none;order:3;position:absolute;top:100%;left:0;right:0;max-width:none;flex-direction:column;gap:0;padding:8px 14px;background:#08140df7;border:1px solid #79c98b35;border-radius:0 0 12px 12px}.botany-detail .nav.nav-open{display:flex}.botany-detail .nav a{padding:12px 8px;border-bottom:1px solid #ffffff14}.botany-detail #menu{display:block;background:#10251a;border:1px solid #79c98b70;color:#eaffed;border-radius:8px;padding:9px 12px}.botany-detail .detail-hero{padding:48px 22px 38px;min-height:330px;margin:20px 0}.botany-detail .detail-grid{grid-template-columns:1fr}.botany-detail .content-panel{min-height:200px;padding:24px}.botany-detail .top-cta{display:none}}
 @media(max-width:420px){.botany-detail .wrap{width:calc(100% - 24px)}.botany-detail .detail-hero h1{font-size:38px;letter-spacing:-1.8px}.botany-detail .brand-logo{width:34px;height:34px}}
+
+
+/* Editorial references and reading layout for botanical knowledge pages */
+.botany-detail .source-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px;list-style:none;padding:0;margin:20px 0}
+.botany-detail .source-list a{display:block;padding:13px 15px;border:1px solid #79c98b35;border-radius:8px;color:#b9f3c4;background:#0b1b12;text-decoration:none;line-height:1.5}
+.botany-detail .source-list a:hover{border-color:#79c98b;color:#fff;background:#102719}
+.botany-detail .source-note{font-size:11px;color:#9cb4a2;margin-top:18px}
+.botany-detail .detail-grid{align-items:stretch}
+.botany-detail .detail-grid .content-panel p{line-height:1.8}
+@media(max-width:650px){.botany-detail .source-list{grid-template-columns:1fr}.botany-detail .detail-grid .content-panel[style*="grid-column"]{grid-column:auto!important}}
