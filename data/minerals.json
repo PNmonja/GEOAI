@@ -1,10 +1,10 @@
 {
   "api_name": "OQTHERA Mineral Data API",
   "api_version": "v1",
-  "dataset_version": "0.1.0-draft",
-  "updated_at": "2026-11-17",
+  "dataset_version": "0.2.0-draft",
+  "updated_at": "2026-11-18",
   "status": "preliminary_unverified",
-  "notice": "Catálogo propio de OQTHERA. Los datos son fichas introductorias pendientes de revisión documental independiente. No usar como identificación definitiva ni como conjunto de entrenamiento.",
+  "notice": "Catálogo ampliado de OQTHERA. Todas las fichas añadidas en esta versión permanecen pendientes de revisión documental independiente. Los recursos externos son puntos de partida; no usar como identificación definitiva ni como conjunto de entrenamiento.",
   "items": [
     {
       "id": "MIN-001",
@@ -125,6 +125,150 @@
       "confusions": "Otras rocas volcánicas oscuras.",
       "review_status": "pending",
       "references": []
+    },
+    {
+      "id": "MIN-007",
+      "name": "Fluorita",
+      "type": "Mineral",
+      "formula": "CaF₂",
+      "group": "Haluros",
+      "hardness": "4",
+      "luster": "Vítreo",
+      "streak": "Blanca",
+      "cleavage": "Exfoliación octaédrica perfecta",
+      "description": "Haluro que puede presentar una amplia variedad de colores y hábito cúbico u octaédrico. El color no es diagnóstico por sí solo.",
+      "confusions": "Cuarzo, calcita y otros minerales transparentes o coloreados.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-1576.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
+    },
+    {
+      "id": "MIN-008",
+      "name": "Pirita",
+      "type": "Mineral",
+      "formula": "FeS₂",
+      "group": "Sulfuros",
+      "hardness": "6–6,5",
+      "luster": "Metálico",
+      "streak": "Negra verdosa a pardo-negruzca",
+      "cleavage": "Exfoliación muy imperfecta; fractura irregular",
+      "description": "Sulfuro de hierro conocido por su brillo metálico y cristales frecuentemente cúbicos. No debe identificarse únicamente por su color dorado.",
+      "confusions": "Calcopirita, marcasita y oro nativo.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-3314.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
+    },
+    {
+      "id": "MIN-009",
+      "name": "Hematita",
+      "type": "Mineral",
+      "formula": "Fe₂O₃",
+      "group": "Óxidos",
+      "hardness": "5–6,5",
+      "luster": "Metálico a terroso",
+      "streak": "Pardo rojiza",
+      "cleavage": "Sin exfoliación marcada; fractura variable",
+      "description": "Óxido de hierro que puede aparecer en masas, agregados botrioidales o cristales. La raya rojiza es una propiedad característica que debe comprobarse correctamente.",
+      "confusions": "Magnetita, goethita y otros óxidos de hierro.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-1856.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
+    },
+    {
+      "id": "MIN-010",
+      "name": "Magnetita",
+      "type": "Mineral",
+      "formula": "Fe₃O₄",
+      "group": "Óxidos",
+      "hardness": "5,5–6,5",
+      "luster": "Metálico a submetálico",
+      "streak": "Negra",
+      "cleavage": "Sin exfoliación marcada; fractura irregular",
+      "description": "Óxido de hierro con magnetismo frecuente y fuerte. La respuesta magnética es una pista, pero debe combinarse con otras propiedades.",
+      "confusions": "Hematita y otros minerales oscuros de brillo metálico.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-2538.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
+    },
+    {
+      "id": "MIN-011",
+      "name": "Ortoclasa",
+      "type": "Mineral",
+      "formula": "KAlSi₃O₈",
+      "group": "Silicatos · tectosilicatos · feldespatos",
+      "hardness": "6",
+      "luster": "Vítreo",
+      "streak": "Blanca",
+      "cleavage": "Dos direcciones de exfoliación casi a 90°",
+      "description": "Feldespato potásico común en numerosas rocas ígneas y metamórficas. Suele mostrar dos planos de exfoliación aproximadamente perpendiculares.",
+      "confusions": "Plagioclasas y otros feldespatos.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-3026.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
+    },
+    {
+      "id": "MIN-012",
+      "name": "Olivino",
+      "type": "Mineral",
+      "formula": "(Mg,Fe)₂SiO₄",
+      "group": "Silicatos · nesosilicatos",
+      "hardness": "6,5–7",
+      "luster": "Vítreo",
+      "streak": "Blanca",
+      "cleavage": "Exfoliación pobre; fractura irregular a concoidea",
+      "description": "Grupo de silicatos rico en magnesio y hierro, habitual en rocas máficas y ultramáficas. Puede presentar tonos verdes, aunque el color por sí solo no basta para identificarlo.",
+      "confusions": "Epidota, berilo y otros minerales verdes.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-2963.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
+    },
+    {
+      "id": "MIN-013",
+      "name": "Talco",
+      "type": "Mineral",
+      "formula": "Mg₃Si₄O₁₀(OH)₂",
+      "group": "Silicatos · filosilicatos",
+      "hardness": "1",
+      "luster": "Nacarado a graso",
+      "streak": "Blanca",
+      "cleavage": "Exfoliación basal perfecta",
+      "description": "Filosilicato muy blando y de tacto característico. Puede aparecer en masas compactas o foliadas; evita generar polvo y no inhales partículas.",
+      "confusions": "Pirofilita, clorita y otros minerales laminares.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-3875.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
+    },
+    {
+      "id": "MIN-014",
+      "name": "Dolomita",
+      "type": "Mineral",
+      "formula": "CaMg(CO₃)₂",
+      "group": "Carbonatos",
+      "hardness": "3,5–4",
+      "luster": "Vítreo a nacarado",
+      "streak": "Blanca",
+      "cleavage": "Exfoliación romboédrica perfecta",
+      "description": "Carbonato de calcio y magnesio que puede formar cristales romboédricos y rocas dolomíticas. Su distinción respecto a calcita requiere varias pruebas apropiadas.",
+      "confusions": "Calcita y otros carbonatos.",
+      "review_status": "pending",
+      "references": [
+        "https://www.mindat.org/min-1294.html",
+        "https://www.handbookofmineralogy.org/"
+      ]
     }
   ]
 }
