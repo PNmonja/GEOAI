@@ -42,8 +42,7 @@ jobs:
         run: python -m compileall -q gateway
 
       - name: Run regression tests
-        working-directory: gateway
-        run: pytest -q
+        run: pytest -q gateway/tests
 
       - name: Lint
         run: ruff check gateway
