@@ -1,6 +1,14 @@
+import sys
+from pathlib import Path
+
 from fastapi.testclient import TestClient
 
-from gateway.main import app
+# Ensure gateway/ is importable whether pytest runs from the repository root
+# or from inside the gateway directory.
+GATEWAY_DIR = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(GATEWAY_DIR))
+
+from main import app  # noqa: E402
 
 
 def test_health_endpoint_is_available():
