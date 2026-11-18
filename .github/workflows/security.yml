@@ -36,10 +36,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r gateway/requirements.txt
-          python -m pip install pip-audit bandit ruff
+          python -m pip install pip-audit bandit ruff pytest
 
       - name: Compile Python sources
         run: python -m compileall -q gateway
+
+      - name: Run regression tests
+        working-directory: gateway
+        run: pytest -q
 
       - name: Lint
         run: ruff check gateway
