@@ -76,3 +76,35 @@ body.discipline-page.routes:before{background-image:url('https://images.unsplash
 .discipline-page.routes .module-card:nth-child(6){--card-image:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=88')}
 .discipline-page .module-card{min-height:350px}
 @media(max-width:700px){.discipline-page .module-card{min-height:280px}.discipline-page:before{opacity:.09}}
+
+
+/* OQTHERA — fotografía por disciplina: fondos y todas las tarjetas */
+body.discipline-page{position:relative;isolation:isolate;background-color:var(--discipline-bg);background-image:linear-gradient(180deg,rgba(5,10,9,.88),rgba(5,10,9,.94)),var(--discipline-background);background-size:cover;background-position:center;background-attachment:fixed}
+body.discipline-page:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 80% 10%,rgba(var(--discipline-rgb),.18),transparent 42%)}
+body.paleontology{--discipline-background:url('https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=2000&q=88')}
+body.mineralogy{--discipline-background:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=88')}
+body.routes{--discipline-background:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=88')}
+body.botany{--discipline-background:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=88')}
+.discipline-page .module-card{position:relative;isolation:isolate;overflow:hidden;min-height:290px;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;background-color:#101820;background-image:linear-gradient(180deg,rgba(5,10,9,.02) 0%,rgba(5,10,9,.42) 42%,rgba(5,10,9,.94) 100%),var(--module-image);background-position:center;background-size:cover;border-color:rgba(var(--discipline-rgb),.35);box-shadow:0 16px 38px rgba(0,0,0,.32)}
+.discipline-page .module-card:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(var(--discipline-rgb),.16),transparent 60%);pointer-events:none}
+.discipline-page .module-card h2,.discipline-page .module-card h3,.discipline-page .module-card p,.discipline-page .module-card small,.discipline-page .module-card a{position:relative;text-shadow:0 2px 12px #000}
+.discipline-page .module-card p{color:#edf1ef;line-height:1.75}
+.discipline-page .module-card:hover{transform:translateY(-5px);border-color:var(--discipline);box-shadow:0 22px 48px rgba(0,0,0,.48)}
+/* Paleontología: fósiles, estratos y paisajes antiguos */
+body.paleontology .module-card:nth-child(1){--module-image:url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=1200&q=88')}
+body.paleontology .module-card:nth-child(2){--module-image:url('https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1200&q=88')}
+body.paleontology .module-card:nth-child(3){--module-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=88')}
+body.paleontology .module-card:nth-child(4){--module-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=88')}
+/* Mineralogía: cristales y minerales */
+body.mineralogy .module-card:nth-child(1){--module-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=88')}
+body.mineralogy .module-card:nth-child(2){--module-image:url('https://images.unsplash.com/photo-1615485500704-8e990f9900f5?auto=format&fit=crop&w=1200&q=88')}
+body.mineralogy .module-card:nth-child(3){--module-image:url('https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1200&q=88')}
+body.mineralogy .module-card:nth-child(4){--module-image:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=88')}
+/* Rutas: montañas, bosques, costa y trabajo de campo */
+body.routes .module-card:nth-child(1){--module-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=88')}
+body.routes .module-card:nth-child(2){--module-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=88')}
+body.routes .module-card:nth-child(3){--module-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=88')}
+body.routes .module-card:nth-child(4){--module-image:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=88')}
+body.routes .module-card:nth-child(5){--module-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=88')}
+body.routes .module-card:nth-child(6){--module-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=88')}
+@media(max-width:700px){.discipline-page .module-grid{grid-template-columns:1fr;padding-inline:18px}.discipline-page .module-card{min-height:260px;padding:22px}body.discipline-page{background-attachment:scroll}}
