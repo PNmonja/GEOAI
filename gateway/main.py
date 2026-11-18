@@ -98,13 +98,21 @@ def check_rate_limit(request: Request) -> None:
     # Use the direct ASGI peer address. Do not trust arbitrary X-Forwarded-For values.
     client_ip = request.client.host if request.client else "unknown"
     now = time.monotonic()
-    bucket = _requests[client_ip]
+    bucket = _requests.get(client_ip)
+    if bucket is None:
+        if len(_requests) >= MAX_TRACKED_CLIENTS:
+            # Evict expired buckets before refusing a new client.
+            expired = [key for key, values in _requests.items()
+                       if not values or now - values[-1] >= WINDOW_SECONDS]
+            for key in expired[:1000]:
+                _requests.pop(key, None)
+        if len(_requests) >= MAX_TRACKED_CLIENTS:
+            raise HTTPException(status_code=503, detail="Temporary capacity limit reached.")
+        bucket = _requests[client_ip]
     while bucket and now - bucket[0] >= WINDOW_SECONDS:
         bucket.popleft()
     if len(bucket) >= MAX_REQUESTS_PER_WINDOW:
         raise HTTPException(status_code=429, detail="Too many requests. Try again shortly.")
-    if len(_requests) > MAX_TRACKED_CLIENTS and client_ip not in _requests:
-        raise HTTPException(status_code=503, detail="Temporary capacity limit reached.")
     bucket.append(now)
 
 
