@@ -57,10 +57,57 @@
 <section id="laboratorio" class="mineral-section"><div class="eyebrow">LABORATORIO OQTHERA</div><h2>Observa antes de concluir</h2><p class="section-intro">La guía actual es un sistema preliminar basado en propiedades declaradas. No analiza fotografías, no calcula probabilidades y puede abstenerse si faltan datos.</p><a class="mineral-action" href="index.html#identify">IR AL IDENTIFICADOR ORIENTATIVO ↗</a></section>
 <section class="mineral-section mineral-sources"><div class="eyebrow">FUENTES DE REFERENCIA</div><h2>Documentación mineralógica</h2><ul><li><a href="https://www.mindat.org/" target="_blank" rel="noopener noreferrer">Mindat — base de datos mineralógica ↗</a></li><li><a href="https://www.handbookofmineralogy.org/" target="_blank" rel="noopener noreferrer">Handbook of Mineralogy — fichas descriptivas ↗</a></li><li><a href="https://www.usgs.gov/centers/national-minerals-information-center" target="_blank" rel="noopener noreferrer">USGS — National Minerals Information Center ↗</a></li><li><a href="https://www.minerals.net/" target="_blank" rel="noopener noreferrer">Minerals.net — guía de minerales ↗</a></li></ul><p class="source-note">Las fuentes se utilizan para contrastar nomenclatura y propiedades; cada ficha deberá incorporar referencias concretas antes de pasar a estado revisado.</p></section>
 <div class="module-links"><a href="index.html">← Página principal</a><a href="botanica.html">Botánica</a><a href="paleontologia.html">Paleontología</a><a href="rutas.html">Rutas</a></div></main><footer><a class="brand" href="index.html"><img class="brand-logo" src="assets/oqthera-mark.svg" alt=""><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a><p>Explora · Investiga · Conserva</p><small>OQTHERA</small><a href="privacidad.html">Privacidad</a></footer><script>const m=document.getElementById('menu'),n=document.getElementById('main-nav');m?.addEventListener('click',()=>{const open=n.classList.toggle('nav-open');m.setAttribute('aria-expanded',String(open));});</script><script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/GEOAI/sw.js").catch(error=>console.warn("OQTHERA offline mode:",error)));}</script><script>
-(async()=>{const root=document.getElementById("mineral-collection");try{const res=await fetch("data/minerals.json",{cache:"no-cache"});if(!res.ok)throw new Error("catalog");const data=await res.json();root.replaceChildren();data.items.forEach((m,i)=>{const card=document.createElement("article");card.className="mineral-item";const img=document.createElement("img");img.loading="lazy";img.alt="Imagen ilustrativa de "+m.name;img.src=m.image_url||[
-"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=85",
-"https://images.unsplash.com/photo-1615485500704-8e990f9900f5?auto=format&fit=crop&w=1000&q=85",
-"https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=1000&q=85",
-"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1000&q=85"
-][i%4];img.onerror=()=>{img.style.display="none"};const body=document.createElement("div");body.className="mineral-item-body";const type=document.createElement("small");type.textContent=m.type+" · "+m.id;const h=document.createElement("h3");h.textContent=m.name;const f=document.createElement("div");f.className="formula";f.textContent=m.formula;const p=document.createElement("p");p.textContent=m.description;const meta=document.createElement("p");meta.textContent="Grupo: "+m.group+" · Dureza: "+m.hardness+" · Brillo: "+m.luster;const status=document.createElement("span");status.className="review";status.textContent="PENDIENTE DE REVISIÓN";body.append(type,h,f,p,meta,status);card.append(img,body);root.append(card)});if(!data.items.length)root.textContent="La colección todavía no contiene muestras."}catch(e){root.textContent="No se ha podido cargar el catálogo. Inténtalo más tarde."}})();
+(async()=>{
+ const root=document.getElementById("mineral-collection");
+ if(!root)return;
+ const commonsSearch=async(name)=>{
+   const query=name+" mineral specimen";
+   const endpoint="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&gsrlimit=8&gsrsearch="+encodeURIComponent(query)+"&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1000&format=json&origin=*";
+   const response=await fetch(endpoint);
+   if(!response.ok)throw new Error("Wikimedia Commons no disponible");
+   const data=await response.json();
+   const pages=Object.values(data.query?.pages||{});
+   const relevant=pages.find(page=>/mineral|crystal|specimen/i.test(page.title||"")&&page.imageinfo?.[0]?.thumburl);
+   return relevant?.imageinfo?.[0]||null;
+ };
+ try{
+   const response=await fetch("data/minerals.json",{cache:"no-cache"});
+   if(!response.ok)throw new Error("Catálogo no disponible");
+   const data=await response.json();
+   root.replaceChildren();
+   const usedImages=new Set();
+   for(const mineral of data.items){
+     const card=document.createElement("article");card.className="mineral-item";
+     const img=document.createElement("img");img.loading="lazy";img.alt="Muestra de "+mineral.name;
+     const body=document.createElement("div");body.className="mineral-item-body";
+     const type=document.createElement("small");type.textContent=mineral.type+" · "+mineral.id;
+     const heading=document.createElement("h3");heading.textContent=mineral.name;
+     const formula=document.createElement("div");formula.className="formula";formula.textContent=mineral.formula;
+     const description=document.createElement("p");description.textContent=mineral.description;
+     const meta=document.createElement("p");meta.textContent="Grupo: "+mineral.group+" · Dureza: "+mineral.hardness+" · Brillo: "+mineral.luster;
+     const status=document.createElement("span");status.className="review";status.textContent="PENDIENTE DE REVISIÓN";
+     const credit=document.createElement("a");credit.className="mineral-image-credit";credit.target="_blank";credit.rel="noopener noreferrer";credit.textContent="Imagen: Wikimedia Commons";
+     try{
+       const image=await commonsSearch(mineral.name.replace(/ \(grupo\)/i,""));
+       if(image?.thumburl&&!usedImages.has(image.thumburl)){
+         usedImages.add(image.thumburl);img.src=image.thumburl;
+         const title=image.extmetadata?.ImageDescription?.value||image.title;
+         credit.href="https://commons.wikimedia.org/wiki/"+encodeURIComponent(image.title.replace(/ /g,"_"));
+         credit.title="Abrir archivo y consultar autoría/licencia: "+title.replace(/<[^>]*>/g,"").slice(0,240);
+         card.append(img);
+       }else{
+         img.remove();
+         credit.href="https://commons.wikimedia.org/w/index.php?search="+encodeURIComponent(mineral.name+" mineral specimen")+"&title=Special:MediaSearch&type=image";
+         credit.textContent="Buscar imagen de "+mineral.name+" en Commons";
+       }
+     }catch(error){
+       img.remove();
+       credit.href="https://commons.wikimedia.org/w/index.php?search="+encodeURIComponent(mineral.name+" mineral specimen")+"&title=Special:MediaSearch&type=image";
+       credit.textContent="Buscar imagen de "+mineral.name+" en Commons";
+     }
+     body.append(type,heading,formula,description,meta,status,credit);card.append(body);root.append(card);
+   }
+   if(!data.items.length)root.textContent="La colección todavía no contiene muestras.";
+ }catch(error){root.textContent="No se ha podido cargar el catálogo. Inténtalo más tarde.";console.error("OQTHERA mineral collection:",error)}
+})();
 </script></body></html>
