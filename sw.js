@@ -7,6 +7,7 @@ const APP_SHELL = [
   "/GEOAI/botanica.css",
   "/GEOAI/app.js",
   "/GEOAI/commons-gallery.js",
+  "/GEOAI/mineral-images.js",
   "/GEOAI/manifest.webmanifest",
   "/GEOAI/assets/oqthera-mark.svg",
   "/GEOAI/assets/oqthera-app-icon.svg",
