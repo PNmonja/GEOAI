@@ -39,6 +39,8 @@
 .regional-routes{max-width:1240px;margin:0 auto;padding:55px 28px 40px}.regional-routes>h2{font-size:clamp(30px,4vw,44px);margin:12px 0}.regional-lead{max-width:760px;color:#b4c6d4;line-height:1.8}.region-block{margin:42px 0}.region-heading{display:flex;align-items:baseline;gap:18px;border-bottom:1px solid rgba(126,214,176,.28);padding-bottom:12px;margin-bottom:18px}.region-heading span{font-size:10px;letter-spacing:2px;color:#8fe2bb}.region-heading h3{font-size:clamp(24px,3vw,34px);margin:0}.regional-route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.regional-route-card{overflow:hidden;border:1px solid rgba(126,214,176,.28);border-radius:10px;background:#0b1716;box-shadow:0 18px 40px #0005}.regional-route-image{height:190px;background:linear-gradient(135deg,#1a3440,#101c24);background-size:cover;background-position:center;position:relative}.regional-route-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(3,12,13,.35))}.regional-route-copy{padding:19px}.regional-route-copy small{font-size:9px;letter-spacing:1.5px;color:#8fe2bb}.regional-route-copy h4{font-size:20px;margin:9px 0}.regional-route-copy p{min-height:76px;color:#b9c9c5;font-size:13px;line-height:1.7}.regional-route-copy a{color:#9be9c6;font-size:12px;text-decoration:none;border-bottom:1px solid #9be9c655;padding-bottom:3px}.regional-route-card:hover{transform:translateY(-4px);transition:transform .2s,border-color .2s;border-color:#8fe2bb}@media(max-width:850px){.regional-route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.regional-routes{padding:36px 18px}.regional-route-grid{grid-template-columns:1fr}.regional-route-image{height:210px}.regional-route-copy p{min-height:0}.region-heading{display:block}.region-heading h3{margin-top:8px}}
 
 .region-filter{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0 30px}.region-filter-button{appearance:none;border:1px solid rgba(126,214,176,.35);border-radius:999px;padding:10px 15px;background:#0b1918;color:#c7d8d1;font:inherit;font-size:12px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}.region-filter-button:hover,.region-filter-button.is-active{background:#17372d;border-color:#8fe2bb;color:#fff}.region-filter-button:focus-visible{outline:2px solid #b8f2d5;outline-offset:3px}.region-filter-button span{margin-left:5px;color:#8fe2bb}.region-block[hidden]{display:none!important}
+
+.route-search-wrap{max-width:520px;margin:18px 0 22px}.route-search-wrap input{display:block;width:100%;margin-top:9px;padding:13px 15px;border:1px solid rgba(126,214,176,.38);border-radius:7px;background:#0a1718;color:#f1f8f4;font:inherit;font-size:14px;outline:none}.route-search-wrap input:focus{border-color:#8fe2bb;box-shadow:0 0 0 3px rgba(143,226,187,.12)}.route-search-wrap input::placeholder{color:#80958c}.route-search-status{margin:8px 0;color:#9eb5aa;font-size:11px}
 </style></head><body class="discipline-page routes">
 <header class="top"><a class="brand" href="index.html"><img class="brand-logo" src="assets/oqthera-mark.svg" alt=""><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a><nav id="main-nav"><a href="botanica.html">Botánica</a><a href="paleontologia.html">Paleontología</a><a href="mineralogia.html">Mineralogía</a><a href="rutas.html">Rutas</a></nav><a class="toplink" href="index.html">INICIO ↗</a><button id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button></header>
 <main>
@@ -64,7 +66,12 @@
  <div class="eyebrow">OQTHERA / ATLAS DE CAMPO</div>
  <h2>Explora cuatro territorios</h2>
  <p class="regional-lead">Una primera selección de espacios naturales e itinerarios conocidos. Consulta siempre la información oficial antes de organizar una visita: los accesos, avisos y condiciones pueden cambiar.</p>
- <nav class="region-filter" aria-label="Filtrar rutas por territorio">
+ <div class="route-search-wrap">
+ <label class="eyebrow" for="route-search">BUSCAR EN EL ATLAS</label>
+ <input id="route-search" type="search" placeholder="Busca por ruta, municipio o entorno…" autocomplete="off">
+ <p id="route-search-status" class="route-search-status" aria-live="polite">12 rutas en cuatro territorios</p>
+</div>
+<nav class="region-filter" aria-label="Filtrar rutas por territorio">
  <button type="button" class="region-filter-button is-active" data-region-filter="all" aria-pressed="true">Todas las regiones <span>12</span></button>
  <button type="button" class="region-filter-button" data-region-filter="comunitat-valenciana" aria-pressed="false">Comunidad Valenciana</button>
  <button type="button" class="region-filter-button" data-region-filter="cataluna" aria-pressed="false">Cataluña</button>
@@ -124,9 +131,31 @@
   regions.forEach(region=>{
    region.hidden=selected!=="all"&&region.id!==selected;
   });
+  applySearch();
   const heading=document.querySelector(".regional-routes>h2");
   if(heading)heading.textContent=selected==="all"?"Explora cuatro territorios": "Rutas · "+button.textContent.trim();
  }));
+ const search=document.getElementById("route-search");
+ const status=document.getElementById("route-search-status");
+ function applySearch(){
+  const query=(search?.value||"").trim().toLocaleLowerCase("es");
+  let count=0;
+  regions.forEach(region=>{
+   let visibleInRegion=0;
+   region.querySelectorAll(".regional-route-card").forEach(card=>{
+    const match=!query||card.textContent.toLocaleLowerCase("es").includes(query);
+    card.hidden=!match;
+    if(match){visibleInRegion++;count++;}
+   });
+   if(query&&visibleInRegion===0)region.hidden=true;
+   else if(!query){
+    const selected=buttons.find(item=>item.classList.contains("is-active"))?.dataset.regionFilter||"all";
+    region.hidden=selected!=="all"&&region.id!==selected;
+   }
+  });
+  if(status)status.textContent=count+" ruta"+(count===1?"":"s")+" encontradas";
+ }
+ search?.addEventListener("input",applySearch);
 })();
 </script>
 </body></html>
