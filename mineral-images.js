@@ -20,7 +20,7 @@
   "Dolomita":["dolomite rhombohedral crystal specimen","dolomite mineral specimen"]
  };
  const clean=value=>String(value||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
- const key=name=>"oqthera:mineral-image:"+name.toLocaleLowerCase("es");
+ const key=name=>"oqthera:mineral-image-v2:"+name.toLocaleLowerCase("es");
  const cacheRead=name=>{try{return JSON.parse(localStorage.getItem(key(name))||"null")}catch{return null}};
  const cacheWrite=(name,value)=>{try{localStorage.setItem(key(name),JSON.stringify(value))}catch{}};
  const pending=new Map();
