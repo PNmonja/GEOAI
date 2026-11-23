@@ -1,4 +1,4 @@
-const CACHE_NAME = "oqthera-shell-v3";
+const CACHE_NAME = "oqthera-shell-v4";
 const APP_SHELL = [
   "/GEOAI/",
   "/GEOAI/index.html",
