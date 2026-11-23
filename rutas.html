@@ -37,6 +37,8 @@
 
 /* Atlas regional OQTHERA */
 .regional-routes{max-width:1240px;margin:0 auto;padding:55px 28px 40px}.regional-routes>h2{font-size:clamp(30px,4vw,44px);margin:12px 0}.regional-lead{max-width:760px;color:#b4c6d4;line-height:1.8}.region-block{margin:42px 0}.region-heading{display:flex;align-items:baseline;gap:18px;border-bottom:1px solid rgba(126,214,176,.28);padding-bottom:12px;margin-bottom:18px}.region-heading span{font-size:10px;letter-spacing:2px;color:#8fe2bb}.region-heading h3{font-size:clamp(24px,3vw,34px);margin:0}.regional-route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.regional-route-card{overflow:hidden;border:1px solid rgba(126,214,176,.28);border-radius:10px;background:#0b1716;box-shadow:0 18px 40px #0005}.regional-route-image{height:190px;background:linear-gradient(135deg,#1a3440,#101c24);background-size:cover;background-position:center;position:relative}.regional-route-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(3,12,13,.35))}.regional-route-copy{padding:19px}.regional-route-copy small{font-size:9px;letter-spacing:1.5px;color:#8fe2bb}.regional-route-copy h4{font-size:20px;margin:9px 0}.regional-route-copy p{min-height:76px;color:#b9c9c5;font-size:13px;line-height:1.7}.regional-route-copy a{color:#9be9c6;font-size:12px;text-decoration:none;border-bottom:1px solid #9be9c655;padding-bottom:3px}.regional-route-card:hover{transform:translateY(-4px);transition:transform .2s,border-color .2s;border-color:#8fe2bb}@media(max-width:850px){.regional-route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.regional-routes{padding:36px 18px}.regional-route-grid{grid-template-columns:1fr}.regional-route-image{height:210px}.regional-route-copy p{min-height:0}.region-heading{display:block}.region-heading h3{margin-top:8px}}
+
+.region-filter{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0 30px}.region-filter-button{appearance:none;border:1px solid rgba(126,214,176,.35);border-radius:999px;padding:10px 15px;background:#0b1918;color:#c7d8d1;font:inherit;font-size:12px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}.region-filter-button:hover,.region-filter-button.is-active{background:#17372d;border-color:#8fe2bb;color:#fff}.region-filter-button:focus-visible{outline:2px solid #b8f2d5;outline-offset:3px}.region-filter-button span{margin-left:5px;color:#8fe2bb}.region-block[hidden]{display:none!important}
 </style></head><body class="discipline-page routes">
 <header class="top"><a class="brand" href="index.html"><img class="brand-logo" src="assets/oqthera-mark.svg" alt=""><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a><nav id="main-nav"><a href="botanica.html">Botánica</a><a href="paleontologia.html">Paleontología</a><a href="mineralogia.html">Mineralogía</a><a href="rutas.html">Rutas</a></nav><a class="toplink" href="index.html">INICIO ↗</a><button id="menu" aria-label="Abrir menú" aria-expanded="false">☰</button></header>
 <main>
@@ -62,7 +64,14 @@
  <div class="eyebrow">OQTHERA / ATLAS DE CAMPO</div>
  <h2>Explora cuatro territorios</h2>
  <p class="regional-lead">Una primera selección de espacios naturales e itinerarios conocidos. Consulta siempre la información oficial antes de organizar una visita: los accesos, avisos y condiciones pueden cambiar.</p>
- <section class="region-block" id="comunitat-valenciana">
+ <nav class="region-filter" aria-label="Filtrar rutas por territorio">
+ <button type="button" class="region-filter-button is-active" data-region-filter="all" aria-pressed="true">Todas las regiones <span>12</span></button>
+ <button type="button" class="region-filter-button" data-region-filter="comunitat-valenciana" aria-pressed="false">Comunidad Valenciana</button>
+ <button type="button" class="region-filter-button" data-region-filter="cataluna" aria-pressed="false">Cataluña</button>
+ <button type="button" class="region-filter-button" data-region-filter="aragon" aria-pressed="false">Aragón</button>
+ <button type="button" class="region-filter-button" data-region-filter="murcia" aria-pressed="false">Murcia</button>
+</nav>
+<section class="region-block" id="comunitat-valenciana">
   <div class="region-heading"><span>01 / ESTE</span><h3>Comunidad Valenciana</h3></div>
   <div class="regional-route-grid">
    <article class="regional-route-card" data-image-query="Penyagolosa mountain Castellon Spain"><div class="regional-route-image"></div><div class="regional-route-copy"><small>CASTELLÓN · MONTAÑA</small><h4>Penyagolosa</h4><p>Itinerarios de montaña alrededor de uno de los paisajes emblemáticos del interior de Castellón.</p><a href="https://www.comunitatvalenciana.com/es/rutas/" target="_blank" rel="noopener">Rutas oficiales de la Comunitat Valenciana ↗</a></div></article>
@@ -99,5 +108,25 @@
 <section class="route-sources"><div class="eyebrow">FUENTES PARA DOCUMENTAR ITINERARIOS</div><h2>Cartografía, patrimonio y conservación</h2><ul><li><a href="https://www.ign.es/" target="_blank" rel="noopener noreferrer">Instituto Geográfico Nacional — cartografía y mapas ↗</a></li><li><a href="https://info.igme.es/" target="_blank" rel="noopener noreferrer">IGME-CSIC — información geocientífica ↗</a></li><li><a href="https://www.miteco.gob.es/" target="_blank" rel="noopener noreferrer">MITECO — espacios naturales y biodiversidad ↗</a></li><li><a href="https://www.gbif.org/" target="_blank" rel="noopener noreferrer">GBIF — datos de biodiversidad ↗</a></li></ul></section>
 <div class="module-links"><a href="index.html">← Página principal</a><a href="botanica.html">Botánica</a><a href="paleontologia.html">Paleontología</a><a href="mineralogia.html">Mineralogía</a></div></main><footer><a class="brand" href="index.html"><img class="brand-logo" src="assets/oqthera-mark.svg" alt=""><span>OQTHERA<small>EXPLORACIÓN CIENTÍFICA</small></span></a><p>Explora · Investiga · Conserva</p><small>OQTHERA</small><a href="privacidad.html">Privacidad</a></footer><script>const m=document.getElementById('menu'),n=document.getElementById('main-nav');m?.addEventListener('click',()=>{const open=n.classList.toggle('nav-open');m.setAttribute('aria-expanded',String(open));});</script><script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/GEOAI/sw.js").catch(error=>console.warn("OQTHERA offline mode:",error)));}</script><script>
 (async()=>{for(const card of document.querySelectorAll('.regional-route-card[data-image-query]')){try{const q=card.dataset.imageQuery;const p=new URLSearchParams({action:'query',format:'json',origin:'*',generator:'search',gsrsearch:'filetype:bitmap '+q,gsrnamespace:'6',gsrlimit:'8',prop:'imageinfo',iiprop:'url',iiurlwidth:'1100'});const r=await fetch('https://commons.wikimedia.org/w/api.php?'+p);if(!r.ok)continue;const d=await r.json();const pages=Object.values(d.query?.pages||{});const terms=q.toLowerCase().split(/\\s+/).filter(x=>x.length>3);const ranked=pages.filter(x=>x.imageinfo?.[0]?.thumburl).map(x=>({x,score:terms.reduce((n,t)=>n+((x.title||'').toLowerCase().includes(t)?1:0),0)})).sort((a,b)=>b.score-a.score);const best=ranked.find(x=>x.score>=1)?.x;if(best)card.querySelector('.regional-route-image').style.backgroundImage='linear-gradient(180deg,rgba(2,8,10,.04),rgba(2,8,10,.2)),url("'+best.imageinfo[0].thumburl.replace(/"/g,'')+'")';}catch(e){console.warn('OQTHERA route image unavailable',e)}}})();
+</script>
+<script>
+(()=>{
+ const buttons=[...document.querySelectorAll("[data-region-filter]")];
+ const regions=[...document.querySelectorAll(".region-block")];
+ if(!buttons.length||!regions.length)return;
+ buttons.forEach(button=>button.addEventListener("click",()=>{
+  const selected=button.dataset.regionFilter;
+  buttons.forEach(item=>{
+   const active=item===button;
+   item.classList.toggle("is-active",active);
+   item.setAttribute("aria-pressed",String(active));
+  });
+  regions.forEach(region=>{
+   region.hidden=selected!=="all"&&region.id!==selected;
+  });
+  const heading=document.querySelector(".regional-routes>h2");
+  if(heading)heading.textContent=selected==="all"?"Explora cuatro territorios": "Rutas · "+button.textContent.trim();
+ }));
+})();
 </script>
 </body></html>
