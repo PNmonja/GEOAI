@@ -60,8 +60,9 @@
 (async()=>{
  const root=document.getElementById("mineral-collection");
  if(!root)return;
+ const englishNames={"Cuarzo":"Quartz","Calcita":"Calcite","Yeso":"Gypsum","Halita":"Halite","Moscovita":"Muscovite","Biotita (grupo)":"Biotite","Granito":"Granite","Basalto":"Basalt","Fluorita":"Fluorite","Pirita":"Pyrite","Hematita":"Hematite","Magnetita":"Magnetite","Ortoclasa":"Orthoclase","Olivino":"Olivine","Talco":"Talc","Dolomita":"Dolomite"};
  const commonsSearch=async(name)=>{
-   const query=name+" mineral specimen";
+   const query=(englishNames[name]||name)+" mineral specimen";
    const endpoint="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&gsrlimit=8&gsrsearch="+encodeURIComponent(query)+"&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1000&format=json&origin=*";
    const response=await fetch(endpoint);
    if(!response.ok)throw new Error("Wikimedia Commons no disponible");
