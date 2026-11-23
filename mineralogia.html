@@ -68,8 +68,15 @@
    if(!response.ok)throw new Error("Wikimedia Commons no disponible");
    const data=await response.json();
    const pages=Object.values(data.query?.pages||{});
-   const relevant=pages.find(page=>/mineral|crystal|specimen/i.test(page.title||"")&&page.imageinfo?.[0]?.thumburl);
-   return relevant?.imageinfo?.[0]||null;
+   const terms=query.toLowerCase().split(/\\s+/).filter(word=>word.length>3&&!["mineral","specimen","crystal"].includes(word));
+   const ranked=pages.filter(page=>page.imageinfo?.[0]?.thumburl).map(page=>{
+     const title=(page.title||"").toLowerCase();
+     const score=terms.reduce((total,term)=>total+(title.includes(term)?3:0),0)
+       +( /mineral|crystal|specimen|rock/i.test(title)?1:0 );
+     return {page,score};
+   }).sort((a,b)=>b.score-a.score);
+   const relevant=ranked.find(item=>item.score>0);
+   return relevant?.page?.imageinfo?.[0]||null;
  };
  try{
    const response=await fetch("data/minerals.json",{cache:"no-cache"});
