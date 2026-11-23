@@ -65,7 +65,8 @@ a:focus-visible{outline:2px solid var(--cyan2);outline-offset:4px}
 @media(max-width:650px){.botany-detail .source-list{grid-template-columns:1fr}.botany-detail .detail-grid .content-panel[style*="grid-column"]{grid-column:auto!important}}
 
 
-/* Botánica: fotografía en el fondo de la página y en cada módulo */
-body.botany{position:relative;isolation:isolate;background-color:#08140d;background-image:linear-gradient(180deg,rgba(5,16,9,.86),rgba(5,16,9,.94)),url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=88');background-size:cover;background-position:center;background-attachment:fixed}
-.botany .module{background-image:linear-gradient(180deg,#06100b08 0%,#06100b55 42%,#06100bf2 100%),var(--botany-image);background-size:cover;background-position:center}
+/* Botánica — bosque cinematográfico en fondo y tarjetas */
+body.botany{position:relative;isolation:isolate;background-color:#08140d;background-image:linear-gradient(180deg,rgba(3,12,6,.58),rgba(3,12,6,.82) 46%,rgba(3,12,6,.94)),url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2200&q=90');background-size:cover;background-position:center;background-attachment:fixed}
+.botany .module{background-image:linear-gradient(180deg,#06100b02 0%,#06100b38 35%,#06100bf0 100%),var(--botany-image);background-size:cover;background-position:center;box-shadow:0 24px 54px #0008;border-color:#79c98b55}
+.botany .module:hover{box-shadow:0 28px 64px #000a;border-color:#b6f0bd}
 @media(max-width:700px){body.botany{background-attachment:scroll}}
